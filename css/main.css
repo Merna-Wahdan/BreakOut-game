@@ -1,3 +1,40 @@
 body {
     background-color: green;
+    margin: 0;
+    padding: 0;
+}
+
+
+#board {
+    background-color: white;
+    width: 100vw;
+    height: 100vh; 
+    position: relative;
+    
+}
+
+
+
+#ball {
+background-color: mediumvioletred;
+display: block;
+background: black;
+border-radius: 50%;
+height: 40px;
+width: 40px;
+margin: 0;
+position: absolute;
+}
+
+
+#player {
+
+}
+
+.paddle {
+background-color: blueviolet;
+position: absolute;
+margin-bottom: 1vh;
+margin-left: 1vh;
+margin-right: 1vh;
 }
