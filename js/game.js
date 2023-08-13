@@ -9,6 +9,7 @@ class Paddle {
   }
 
   draw(x) {
+    // this.x = x
     cTxt.beginPath();
     cTxt.fillStyle = "red";
     cTxt.fillRect(x, this.y, this.width, this.height);
@@ -71,8 +72,20 @@ setInterval(() => {
   if (ballX + ballDx + ball.r >= canvas.width) {
     ballDx = -3;
   }
-}, 20);
 
+  if (paddleX <= 0) {
+    paddleX = 0;
+  } else if (paddleX + paddle.width > canvas.width) {
+    paddleX = canvas.width - paddle.width;
+  }
+}, 10);
+
+/* 
+TODO 1:
+
+Flicker is happening: will fix it later.
+
+*/
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") {
     paddleX -= paddleDx;
