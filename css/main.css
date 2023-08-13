@@ -1,7 +1,7 @@
-body {
+/* body {
     margin: 10;
     padding: 10;
-}
+} */
 
 /* 
 #board {
@@ -39,8 +39,7 @@ margin-right: 1vh;
 } */
 
 #breakOut {
-    border: 1px solid grey;
-    /* padding-bottom: 5px; */
+    border: 1px solid black;
     /* margin: auto;
     border: 3px solid green;
     padding: 10px; */
@@ -53,6 +52,8 @@ margin-right: 1vh;
     border:2px solid black;
     width: 60%;
     height: 80%; */
-
-
 }
+/* 
+.paddle {
+    position: absolute;
+} */

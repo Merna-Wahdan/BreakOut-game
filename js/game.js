@@ -3,9 +3,9 @@ const cTxt = canvas.getContext("2d");
 
 class Paddle {
   constructor() {
-    this.width = 90;
-    this.height = 50;
-    this.y = 490;
+    this.width = 120;
+    this.height = 20;
+    this.y = 580;
   }
 
   draw(x) {
@@ -42,41 +42,41 @@ const ball = new Ball();
 let ballX = canvas.width / 2;
 let ballY = paddle.y - ball.r;
 
-let dx = 3;
-let dy = -3;
+let ballDx = 3;
+let ballDy = -3;
+
+let paddleX = canvas.width / 2 - paddle.width / 2;
+
+let paddleDx = 50;
 
 setInterval(() => {
   cTxt.clearRect(0, 0, canvas.width, canvas.height);
 
-  paddle.draw(canvas.width / 2 - paddle.width / 2);
+  paddle.draw(paddleX);
   ball.draw(ballX, ballY);
-  ballX += dx;
-  ballY += dy;
+  ballX += ballDx;
+  ballY += ballDy;
 
-  if(ballY + dy - ball.r <= 0) {
-    dy = 3
-  } 
-
-  if (ballY + dy + ball.r >= canvas.height) {
-    dy = -3
-  }
-  if (ballX + dx - ball.r <= 0) {
-    dx = 3
+  if (ballY + ballDy - ball.r <= 0) {
+    ballDy = 3;
   }
 
-  if (ballX + dx + ball.r >= canvas.width) {
-    dx = -3
-  } 
+  if (ballY + ballDy + ball.r >= canvas.height) {
+    ballDy = -3;
+  }
+  if (ballX + ballDx - ball.r <= 0) {
+    ballDx = 3;
+  }
 
-}, 20); 
+  if (ballX + ballDx + ball.r >= canvas.width) {
+    ballDx = -3;
+  }
+}, 20);
 
-
-
-  
-// document.addEventListener("keydown", (e) => {
-//     if(e.code === 'Space') {
-//         setInterval(() => {
-//             ball.draw(canvas.width/2, paddle.y - ball.r)
-//         }, 10)
-//     }
-// })
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") {
+    paddleX -= paddleDx;
+  } else if (e.key === "ArrowRight") {
+    paddleX += paddleDx;
+  }
+});
