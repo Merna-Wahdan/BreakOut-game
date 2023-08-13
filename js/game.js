@@ -38,21 +38,41 @@ class Ball {
 const paddle = new Paddle();
 
 const ball = new Ball();
+
 let ballX = canvas.width / 2;
 let ballY = paddle.y - ball.r;
+
+let dx = 3;
+let dy = -3;
 
 setInterval(() => {
   cTxt.clearRect(0, 0, canvas.width, canvas.height);
 
   paddle.draw(canvas.width / 2 - paddle.width / 2);
   ball.draw(ballX, ballY);
-  ballX += 3;
-  ballY -= 3;
-}, 10);
+  ballX += dx;
+  ballY += dy;
+
+  if(ballY + dy - ball.r <= 0) {
+    dy = 3
+  } 
+
+  if (ballY + dy + ball.r >= canvas.height) {
+    dy = -3
+  }
+  if (ballX + dx - ball.r <= 0) {
+    dx = 3
+  }
+
+  if (ballX + dx + ball.r >= canvas.width) {
+    dx = -3
+  } 
+
+}, 20); 
 
 
 
-
+  
 // document.addEventListener("keydown", (e) => {
 //     if(e.code === 'Space') {
 //         setInterval(() => {
