@@ -3,7 +3,22 @@ const canvas = document.getElementById('breakOut')
 const cTxt = canvas.getContext("2d")
 
 
-cTxt.beginPath();
-cTxt.fillStyle = "red";
-cTxt.fillRect(150, 490, 90, 50)
-cTxt.stroke();
+
+class Paddle {
+    constructor() {
+        this.width = 90
+        this.height = 50
+        this.y = 490
+    }
+
+    draw(x) {
+        cTxt.beginPath();
+        cTxt.fillStyle = "red";
+        cTxt.fillRect(x, this.y, this.width, this.height)
+        cTxt.stroke();
+    }
+}
+
+
+const paddle = new Paddle()
+paddle.draw(150)
