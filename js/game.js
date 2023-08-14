@@ -41,33 +41,33 @@ class Ball {
 }
 
 class Breaks {
-    constructor() {
-        this.width = 100
-        this.height = 30
-        this.y = 10
-    }
+  constructor() {
+    this.width = 100;
+    this.height = 30;
+  }
 
-    draw(x) {
-        cTxt.beginPath()
-        cTxt.fillStyle = "black"
-        cTxt.fillRect(x, this.y, this.width, this.height)
-        cTxt.stroke()
-        cTxt.closePath()
-    }
-
+  draw(x, y) {
+    cTxt.beginPath();
+    cTxt.fillStyle = "black";
+    cTxt.fillRect(x, y, this.width, this.height);
+    cTxt.stroke();
+    cTxt.closePath();
+  }
 }
 
 const paddle = new Paddle();
 const ball = new Ball();
 
+let breaks = [];
 
-let breaksFirstRow = []
-
-for (let i = 0; i < 9 ; i++) {
+for (let i = 0; i < 9; i++) {
+  breaks[i] = []
+  for(let j = 0; j < 3; j++) {
     const singleBreak = new Breaks();
-    breaksFirstRow.push(singleBreak)
+    breaks[i][j] = singleBreak
+  }
+  
 }
-
 
 let paddleX = canvas.width / 2 - paddle.width / 2;
 let paddleDx = 50;
@@ -77,29 +77,29 @@ let ballY = paddle.y - ball.r;
 let ballDx = 3;
 let ballDy = -3;
 
-let breaksX = canvas.width / 90
-
-
-
+//let breaksX = canvas.width / 90;
 
 const interval = setInterval(() => {
-    
   cTxt.clearRect(0, 0, canvas.width, canvas.height);
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
 
-  for( let i = 0; i < breaksFirstRow.length; i++) {
-    breaksFirstRow[i].draw((i * (breaksFirstRow[i].width + 10)) +10 )
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 3; j++){
+      let b = breaks[i][j]
+      let bX = i * (b.width + 10) + 10
+      let bY = j * (b.height + 5) + 10
+      b.draw(bX, bY);
+    }
   }
-
-
   
+
   ballX += ballDx;
   ballY += ballDy;
 
   if (ballX + ballDx - ball.r <= 0 || ballX + ballDx + ball.r >= canvas.width) {
-    ballDx = - ballDx;
+    ballDx = -ballDx;
   }
 
   if (paddleX <= 0) {
@@ -108,34 +108,27 @@ const interval = setInterval(() => {
     paddleX = canvas.width - paddle.width;
   }
 
-
   if (ballY + ballDy - ball.r <= 0) {
-    ballDy = - ballDy;
+    ballDy = -ballDy;
+  }
 
-  } 
-  
   /*
   TODO 2:
   fix game over when the ball touch the bottom.
   now: the ball collision starts when reach the paddle top height
   */
 
-  if(ballY + ballDy + ball.r >= canvas.height - paddle.height) {
-   if(ballX > paddleX && ballX < paddleX + paddle.width ) {
-    ballDy = - ballDy;
-   } else {
-        alert("You lost");
-        document.location.reload();
-        clearInterval(interval)
-       } 
+  if (ballY + ballDy + ball.r >= canvas.height - paddle.height) {
+    if (ballX > paddleX && ballX < paddleX + paddle.width) {
+      ballDy = -ballDy;
+    } else {
+      alert("You lost");
+      document.location.reload();
+      clearInterval(interval);
     }
-
-    // for (let i = 0; i < breaksFirstRow.length; i++) {
-
-    // }
+  }
 
 }, 10);
-
 
 /* 
 TODO 1:
