@@ -1,6 +1,11 @@
 const canvas = document.getElementById("breakOut");
 const cTxt = canvas.getContext("2d");
 
+/*
+TODO 3:
+Fix: I can't increase the height
+
+*/
 class Paddle {
   constructor() {
     this.width = 120;
@@ -22,7 +27,6 @@ class Ball {
   constructor() {
     this.r = 15;
     //this.x = canvas.width/2
-    // this.y = canvas.height - this.r - paddle.height
     //this.y = paddle.y - this.r
   }
 
@@ -36,19 +40,44 @@ class Ball {
   }
 }
 
+class Breaks {
+    constructor() {
+        this.width = 100
+        this.height = 30
+        this.y = 10
+
+
+    }
+
+    draw(x) {
+        cTxt.beginPath()
+        cTxt.fillStyle = "black"
+        cTxt.fillRect(x, this.y, this.width, this.height)
+        cTxt.stroke()
+        cTxt.closePath()
+    }
+
+
+}
+
 const paddle = new Paddle();
 
 const ball = new Ball();
 
+const breaks = new Breaks();
+
+
+let paddleX = canvas.width / 2 - paddle.width / 2;
+let paddleDx = 50;
+
 let ballX = canvas.width / 2;
 let ballY = paddle.y - ball.r;
-
 let ballDx = 3;
 let ballDy = -3;
 
-let paddleX = canvas.width / 2 - paddle.width / 2;
+let breaksX = canvas.width / 90
 
-let paddleDx = 50;
+
 
 
 const interval = setInterval(() => {
@@ -57,6 +86,7 @@ const interval = setInterval(() => {
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
+  breaks.draw(breaksX)
 
 
   
@@ -79,6 +109,12 @@ const interval = setInterval(() => {
 
   } 
   
+  /*
+  TODO 2:
+  fix game over when the ball touch the bottom.
+  now: the ball collision starts when reach the paddle top height
+  */
+
   if(ballY + ballDy + ball.r >= canvas.height - paddle.height) {
    if(ballX > paddleX && ballX < paddleX + paddle.width ) {
     ballDy = - ballDy;
@@ -89,7 +125,7 @@ const interval = setInterval(() => {
        } 
     }
 
-}, 20);
+}, 10);
 
 
 /* 
