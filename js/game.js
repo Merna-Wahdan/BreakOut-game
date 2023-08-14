@@ -50,27 +50,21 @@ let paddleX = canvas.width / 2 - paddle.width / 2;
 
 let paddleDx = 50;
 
-setInterval(() => {
+
+const interval = setInterval(() => {
+    
   cTxt.clearRect(0, 0, canvas.width, canvas.height);
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
+
+
+  
   ballX += ballDx;
   ballY += ballDy;
 
-  if (ballY + ballDy - ball.r <= 0) {
-    ballDy = 3;
-  }
-
-  if (ballY + ballDy + ball.r >= canvas.height) {
-    ballDy = -3;
-  }
-  if (ballX + ballDx - ball.r <= 0) {
-    ballDx = 3;
-  }
-
-  if (ballX + ballDx + ball.r >= canvas.width) {
-    ballDx = -3;
+  if (ballX + ballDx - ball.r <= 0 || ballX + ballDx + ball.r >= canvas.width) {
+    ballDx = - ballDx;
   }
 
   if (paddleX <= 0) {
@@ -78,13 +72,26 @@ setInterval(() => {
   } else if (paddleX + paddle.width > canvas.width) {
     paddleX = canvas.width - paddle.width;
   }
-}, 10);
+
+
+  if (ballY + ballDy - ball.r <= 0) {
+    ballDy = - ballDy;
+  }
+
+
+if(ballY + ballDy >= canvas.height) {
+     ballDy = - ballDy;
+     alert("You lost");
+     document.location.reload();
+     //clearInterval(interval)
+}
+
+}, 1);
+
 
 /* 
 TODO 1:
-
 Flicker is happening: will fix it later.
-
 */
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") {
