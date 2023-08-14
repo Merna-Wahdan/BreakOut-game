@@ -8,7 +8,7 @@ Fix: I can't increase the height
 */
 class Paddle {
   constructor() {
-    this.width = canvas.width;
+    this.width = 200;
     this.height = 20;
     this.y = 580;
   }
@@ -143,7 +143,7 @@ const interval = setInterval(() => {
 for(let i = 0; i < bricksColCount; i++) {
   for(let j = 0; j < bricksRowsCount; j++) {
     let b = breaks[i][j] 
-    if(ballX > b.x && ballX < b.width + b.x && ballY  > b.y && ballY  < b.y + breakHeight) {
+    if(ballX > b.x && ballX < b.width + b.x && ballY  > b.y && ballY  < b.y + breakHeight && !b.hit ) {
       b.hit = true 
       ballDy = -ballDy;
     }
