@@ -79,7 +79,7 @@ const interval = setInterval(() => {
 
   } 
   
-  if(ballY + ballDy >= canvas.height) {
+  if(ballY + ballDy + ball.r >= canvas.height - paddle.height) {
    if(ballX > paddleX && ballX < paddleX + paddle.width ) {
     ballDy = - ballDy;
    } else {
@@ -89,7 +89,7 @@ const interval = setInterval(() => {
        } 
     }
 
-}, 1);
+}, 20);
 
 
 /* 
