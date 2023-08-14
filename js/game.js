@@ -76,15 +76,18 @@ const interval = setInterval(() => {
 
   if (ballY + ballDy - ball.r <= 0) {
     ballDy = - ballDy;
-  }
 
-
-if(ballY + ballDy >= canvas.height) {
-     ballDy = - ballDy;
-     alert("You lost");
-     document.location.reload();
-     //clearInterval(interval)
-}
+  } 
+  
+  if(ballY + ballDy >= canvas.height) {
+   if(ballX > paddleX && ballX < paddleX + paddle.width ) {
+    ballDy = - ballDy;
+   } else {
+        alert("You lost");
+        document.location.reload();
+        clearInterval(interval)
+       } 
+    }
 
 }, 1);
 
