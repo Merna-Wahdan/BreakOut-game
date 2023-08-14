@@ -8,7 +8,7 @@ Fix: I can't increase the height
 */
 class Paddle {
   constructor() {
-    this.width = 120;
+    this.width = canvas.width;
     this.height = 20;
     this.y = 580;
   }
@@ -40,13 +40,21 @@ class Ball {
   }
 }
 
-class Breaks {
+const breakWidth = 100;
+const breakHeight = 30;
+const bricksColCount = 9;
+const bricksRowsCount = 3;
+
+class Break {
   constructor() {
-    this.width = 100;
-    this.height = 30;
+    this.width = breakWidth;
+    this.height = breakHeight;
+    this.hit = false
   }
 
   draw(x, y) {
+    this.x = x
+    this.y = y
     cTxt.beginPath();
     cTxt.fillStyle = "black";
     cTxt.fillRect(x, y, this.width, this.height);
@@ -60,10 +68,10 @@ const ball = new Ball();
 
 let breaks = [];
 
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < bricksColCount; i++) {
   breaks[i] = []
-  for(let j = 0; j < 3; j++) {
-    const singleBreak = new Breaks();
+  for(let j = 0; j < bricksRowsCount; j++) {
+    const singleBreak = new Break();
     breaks[i][j] = singleBreak
   }
   
@@ -85,13 +93,15 @@ const interval = setInterval(() => {
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
 
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 3; j++){
+  for (let i = 0; i < bricksColCount; i++) {
+    for (let j = 0; j < bricksRowsCount; j++){
       let b = breaks[i][j]
       let bX = i * (b.width + 10) + 10
       let bY = j * (b.height + 5) + 10
-      b.draw(bX, bY);
-    }
+      if(b.hit === false) {
+        b.draw(bX, bY);        
+      }
+  }
   }
   
 
@@ -110,7 +120,9 @@ const interval = setInterval(() => {
 
   if (ballY + ballDy - ball.r <= 0) {
     ballDy = -ballDy;
-  }
+  } 
+
+
 
   /*
   TODO 2:
@@ -128,6 +140,16 @@ const interval = setInterval(() => {
     }
   }
 
+for(let i = 0; i < bricksColCount; i++) {
+  for(let j = 0; j < bricksRowsCount; j++) {
+    let b = breaks[i][j] 
+    if(ballX > b.x && ballX < b.width + b.x && ballY  > b.y && ballY  < b.y + breakHeight) {
+      b.hit = true 
+      ballDy = -ballDy;
+    }
+  }
+}
+ 
 }, 10);
 
 /* 
