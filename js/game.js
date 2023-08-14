@@ -45,8 +45,6 @@ class Breaks {
         this.width = 100
         this.height = 30
         this.y = 10
-
-
     }
 
     draw(x) {
@@ -57,14 +55,18 @@ class Breaks {
         cTxt.closePath()
     }
 
-
 }
 
 const paddle = new Paddle();
-
 const ball = new Ball();
 
-const breaks = new Breaks();
+
+let breaksFirstRow = []
+
+for (let i = 0; i < 9 ; i++) {
+    const singleBreak = new Breaks();
+    breaksFirstRow.push(singleBreak)
+}
 
 
 let paddleX = canvas.width / 2 - paddle.width / 2;
@@ -86,7 +88,10 @@ const interval = setInterval(() => {
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
-  breaks.draw(breaksX)
+
+  for( let i = 0; i < breaksFirstRow.length; i++) {
+    breaksFirstRow[i].draw((i * (breaksFirstRow[i].width + 10)) +10 )
+  }
 
 
   
@@ -124,6 +129,10 @@ const interval = setInterval(() => {
         clearInterval(interval)
        } 
     }
+
+    // for (let i = 0; i < breaksFirstRow.length; i++) {
+
+    // }
 
 }, 10);
 
