@@ -1,0 +1,53 @@
+body {
+    margin: 10;
+    padding: 50;
+    background-color: white;
+    position: relative;
+    
+}
+
+
+#score {
+    position: absolute;
+    font-size: 15px;
+    font-family: Arial;
+    /* width: 100px;
+    padding-left: 250px; */
+    margin: 5px;
+  }
+
+  
+
+#board {
+    background-color: white;
+    width: 100vw;
+    height: 100vh; 
+    position: relative;
+    
+}
+
+
+
+#ball {
+background-color: mediumvioletred;
+display: block;
+background: black;
+border-radius: 50%;
+height: 40px;
+width: 40px;
+margin: 0;
+position: absolute;
+}
+
+
+#player {
+
+}
+
+.paddle {
+background-color: blueviolet;
+position: absolute;
+margin-bottom: 1vh;
+margin-left: 1vh;
+margin-right: 1vh;
+} 

@@ -8,7 +8,7 @@ Fix: I can't increase the height
 */
 class Paddle {
   constructor() {
-    this.width = 200 //canvas.width;
+    this.width = 200;
     this.height = 20;
     this.y = 580;
   }
@@ -69,11 +69,6 @@ class Score {
     this.score = 0
   }
 
-  draw() {
-    cTxt.font = "30px Arial"
-    cTxt.fillStyle = "red"
-    cTxt.fillText(`Score: ${this.score}`, 10, 30)
-  }
 }
 
 
@@ -111,7 +106,6 @@ const interval = setInterval(() => {
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
-  score.draw();
 
 
   for (let i = 0; i < bricksColCount; i++) {
@@ -191,7 +185,7 @@ for(let i = 0; i < bricksColCount; i++) {
 //     clearInterval(interval);
 // }
  
-}, 1);
+}, 10);
 
 /* 
 TODO 1:

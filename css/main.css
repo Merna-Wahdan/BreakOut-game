@@ -1,16 +1,28 @@
 body {
     margin: 10;
-    padding: 10;
+    padding: 50;
     background-color: white;
+    position: relative;
+    
 }
 
 #breakOut {
     border: 3px solid green;
-    position: absolute; 
-    top: 0px; 
-    left: 0px; 
-    right: 0px; 
-    bottom: 0px; 
+    position: relative;
+    top: 10px; 
+    left: 10px; 
+    right: 10px; 
+    bottom: 10px; 
     margin: auto; 
+    display: block;
 }
 
+
+#score {
+  position: absolute;
+  font-size: 15px;
+  font-family: Arial;
+  /* width: 100px;
+  padding-left: 250px; */
+  margin: 5px;
+}
