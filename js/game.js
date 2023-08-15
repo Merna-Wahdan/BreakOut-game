@@ -44,6 +44,7 @@ const breakWidth = 100;
 const breakHeight = 30;
 const bricksColCount = 9;
 const bricksRowsCount = 3;
+const totalBricks = bricksColCount * bricksRowsCount
 
 class Break {
   constructor() {
@@ -84,6 +85,10 @@ let ballX = canvas.width / 2;
 let ballY = paddle.y - ball.r;
 let ballDx = 3;
 let ballDy = -3;
+
+let score = 0
+
+console.log(breaks)
 
 //let breaksX = canvas.width / 90;
 
@@ -129,8 +134,7 @@ const interval = setInterval(() => {
   fix game over when the ball touch the bottom.
   now: the ball collision starts when reach the paddle top height
   */
-
-  if (ballY + ballDy + ball.r >= canvas.height - paddle.height) {
+  if (ballY + ballDy + ball.r >= canvas.height - paddle.height) { //- paddle.height > the 
     if (ballX > paddleX && ballX < paddleX + paddle.width) {
       ballDy = -ballDy;
     } else {
@@ -145,9 +149,16 @@ for(let i = 0; i < bricksColCount; i++) {
     let b = breaks[i][j] 
     if(ballX > b.x && ballX < b.width + b.x && ballY  > b.y && ballY  < b.y + breakHeight && !b.hit ) {
       b.hit = true 
+      score++
+      console.log(score)
       ballDy = -ballDy;
+    } 
     }
   }
+  if(score === totalBricks) {
+    alert("You won");
+    document.location.reload();
+    clearInterval(interval);
 }
  
 }, 10);
@@ -158,8 +169,9 @@ Flicker is happening: will fix it later.
 */
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") {
-    paddleX -= paddleDx;
+    paddleX -= paddleX;
   } else if (e.key === "ArrowRight") {
-    paddleX += paddleDx;
+    paddleX += paddleX;
   }
+
 });
