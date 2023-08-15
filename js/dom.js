@@ -1,10 +1,14 @@
 window.addEventListener("load", (event) => {
 
+let body = document.getElementById('board')
+
+console.log(body.width)
+
 class Paddle {
     constructor() {
         this.width = 10;
         this.height = 5;
-        this.paddleX = 50 - this.width/2;
+        this.paddleX = 50 - this.width/3;
         this.paddleY = 0;
 
         this.createNewPaddle()
@@ -53,21 +57,21 @@ class Paddle {
 
 class Ball {
     constructor() {
-        this.paddleX = 50 - ((paddle.width + 2)/8);
-        this.paddleY = 10;
+        this.ballX = 100/2 //50 - ((paddle.width + 2)/8);
+        this.ballY = 10;
 
-        this.createNewPaddle()
+        this.createNewBall()
     }
 
-    createNewPaddle() {
+    createNewBall() {
         this.ballElm = document.createElement('div')
         this.ballElm.id = 'ball'
 
         //Set position
         this.ballElm.style.width = this.width + "vw"
         this.ballElm.style.height = this.height + "vh"
-        this.ballElm.style.left = this.paddleX + "vw"
-        this.ballElm.style.bottom = this.paddleY+ "vh"
+        this.ballElm.style.left = this.ballX + "vw"
+        this.ballElm.style.bottom = this.ballY+ "vh"
 
         const appendPaddle = document.getElementById("board")
         appendPaddle.appendChild(this.ballElm)
@@ -75,16 +79,36 @@ class Ball {
     }
 
 
-    moveBall() {
-
+    moveBall(x, y) {
+        this.ballElm.style.left = x + "vw"
+        this.ballElm.style.bottom = y + "vh"
     }
 }
 
-setInterval(() => {
-    const ball = new Ball()
-}, 1000)
-
 const paddle = new Paddle()
+
+const ball = new Ball()
+let ballDx = 1;
+let ballDy = 1;
+let ballX = 100/2 
+let ballY = 10;
+
+
+setInterval(() => {
+
+    ball.moveBall(ballX, ballY)
+    ballX += ballDx
+    ballY += ballDy
+
+    if (ballX + ballDx <= 0 || ballX + ballDx >= 100) {
+        ballDx = -ballDx;
+      }
+    
+      if (ballY + ballDy >= 100) {
+        ballDy = -ballDy;
+      } 
+}, 20)
+
 
 
 document.addEventListener("keydown", (e) => {
