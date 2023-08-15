@@ -8,7 +8,7 @@ Fix: I can't increase the height
 */
 class Paddle {
   constructor() {
-    this.width = 200;
+    this.width = 200 //canvas.width;
     this.height = 20;
     this.y = 580;
   }
@@ -33,7 +33,7 @@ class Ball {
   draw(x, y) {
     cTxt.beginPath();
     cTxt.arc(x, y, this.r, 0, Math.PI * 2);
-    cTxt.fillStyle = "green";
+    cTxt.fillStyle = "red";
     cTxt.fill();
     cTxt.stroke();
     cTxt.closePath();
@@ -64,8 +64,22 @@ class Break {
   }
 }
 
+class Score {
+  constructor() {
+    this.score = 0
+  }
+
+  draw() {
+    cTxt.font = "30px Arial"
+    cTxt.fillStyle = "red"
+    cTxt.fillText(`Score: ${this.score}`, 10, 30)
+  }
+}
+
+
 const paddle = new Paddle();
 const ball = new Ball();
+const score = new Score();
 
 let breaks = [];
 
@@ -86,7 +100,7 @@ let ballY = paddle.y - ball.r;
 let ballDx = 3;
 let ballDy = -3;
 
-let score = 0
+//let score = 0
 
 console.log(breaks)
 
@@ -97,12 +111,14 @@ const interval = setInterval(() => {
 
   paddle.draw(paddleX);
   ball.draw(ballX, ballY);
+  score.draw();
+
 
   for (let i = 0; i < bricksColCount; i++) {
     for (let j = 0; j < bricksRowsCount; j++){
       let b = breaks[i][j]
       let bX = i * (b.width + 10) + 10
-      let bY = j * (b.height + 5) + 10
+      let bY = j * (b.height + 10) + 10
       if(b.hit === false) {
         b.draw(bX, bY);        
       }
@@ -134,7 +150,7 @@ const interval = setInterval(() => {
   fix game over when the ball touch the bottom.
   now: the ball collision starts when reach the paddle top height
   */
-  if (ballY + ballDy + ball.r >= canvas.height - paddle.height) { //- paddle.height > the 
+  if (ballY + ballDy + ball.r >= canvas.height ) { //- paddle.height > the 
     if (ballX > paddleX && ballX < paddleX + paddle.width) {
       ballDy = -ballDy;
     } else {
@@ -149,19 +165,33 @@ for(let i = 0; i < bricksColCount; i++) {
     let b = breaks[i][j] 
     if(ballX > b.x && ballX < b.width + b.x && ballY  > b.y && ballY  < b.y + breakHeight && !b.hit ) {
       b.hit = true 
-      score++
-      console.log(score)
+      //score.score++
+      console.log(score.score)
       ballDy = -ballDy;
+      score.score++
+
+      if(score.score === totalBricks) {
+        alert("You won");
+        document.location.reload();
+        clearInterval(interval);
+    }
     } 
     }
   }
-  if(score === totalBricks) {
-    alert("You won");
-    document.location.reload();
-    clearInterval(interval);
-}
+
+  /*
+  TODO 4:
+  bug: you won appears when hits the last brick 
+  fix: you won appears after hitting the last brick 
+  */
+
+//   if(score.score === totalBricks) {
+//     alert("You won");
+//     document.location.reload();
+//     clearInterval(interval);
+// }
  
-}, 10);
+}, 1);
 
 /* 
 TODO 1:
@@ -169,9 +199,9 @@ Flicker is happening: will fix it later.
 */
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") {
-    paddleX -= paddleX;
+    paddleX -= paddleDx;
   } else if (e.key === "ArrowRight") {
-    paddleX += paddleX;
+    paddleX += paddleDx;
   }
 
 });
