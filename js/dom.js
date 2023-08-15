@@ -146,7 +146,7 @@ for(let i = 0; i < bricksColCount; i++) {
         ball.ballX += ballDx
         ball.ballY += ballDy
     
-        if (ball.ballX < 0 || ball.ballX + ballDiameter > boardWidth) {
+        if (ball.ballX - ballDiameter < 0 || ball.ballX + ballDiameter > boardWidth) {
             ballDx = -ballDx;
           }
         
@@ -154,7 +154,7 @@ for(let i = 0; i < bricksColCount; i++) {
             ballDy = -ballDy;
           } 
     
-          if (ball.ballX + ballDiameter > paddle.paddleX &&
+          if (ball.ballX + ballDiameter >= paddle.paddleX &&
              ball.ballX < paddle.paddleX + paddle.width &&
              ball.ballY + ballDiameter > paddle.paddleY &&
              ball.ballY < paddle.paddleY + paddle.height) {
@@ -176,6 +176,8 @@ for(let i = 0; i < bricksColCount; i++) {
                   ball.ballY + ballDiameter > brick.brickY &&
                    ball.ballY < brick.height + brick.brickY) {
                     ballDy = -ballDy
+                    brick.brickElm.remove();
+                    bricks.splice(i, 1);
                 }
           }
           
@@ -191,24 +193,8 @@ for(let i = 0; i < bricksColCount; i++) {
         }
     })
     
-    });
-    
-    
-    
-    // class Paddle {
-    //     constructor() {
-    //         this.width = 90
-    //         this.height = 50
-    //         this.paddleY = 490
-    //     }
-    // }
-    
-    
-    
-    
-    
-    
-    
+    });    
+
     // class Score {
     //     constructor() {
     //       this.score = 0
@@ -217,16 +203,3 @@ for(let i = 0; i < bricksColCount; i++) {
     
     // //   }
     // const score = new Score();
-    
-
-
-
-    // console.log('1', ball.ballX + ballDiameter > brick.brickX)
-    // console.log('2', ball.ballX < brick.height + brick.brickX)
-    // console.log('3', ball.ballY + ballDiameter > brick.brickY)
-    // console.log('4', ball.ballY < brick.height + brick.brickY)
-    // console.log('x',brick.brickX)
-    // console.log('y',brick.brickY)
-    // console.log('w',brick.height)
-    // console.log('h',brick.height)
-    // console.log('brick', brick)
