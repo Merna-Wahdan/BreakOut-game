@@ -65,8 +65,11 @@ window.addEventListener("load", (event) => {
     
     class Ball {
         constructor() {
-            this.ballX = boardWidth / 2 - paddle.width / 8 ;
-            this.ballY = paddle.height + 15;
+            // this.ballX = boardWidth / 2 - paddle.width / 8 ;
+            // this.ballY = paddle.height + 15;
+            this.ballX = 290;
+            this.ballY = 360;
+
     
             this.createNewBall()
         }
@@ -78,7 +81,7 @@ window.addEventListener("load", (event) => {
             //Set position
     
             this.ballElm.style.left = this.ballX + "px"
-            this.ballElm.style.bottom = this.ballY + "px"
+            this.ballElm.style.top = this.ballY + "px"
     
             const board = document.getElementById("board")
             board.appendChild(this.ballElm)
@@ -87,8 +90,10 @@ window.addEventListener("load", (event) => {
     
     
         moveBall(x, y) {
+            this.ballX = x;
+            this.ballY = y;
             this.ballElm.style.left = x + "px"
-            this.ballElm.style.bottom = y + "px"
+            this.ballElm.style.top = y + "px"
         }
     }
     
@@ -132,7 +137,7 @@ for(let i = 0; i < bricksColCount; i++) {
 }
     
     let ballDx = 2;
-    let ballDy = 2;
+    let ballDy = -2;
     
     
     const interval = setInterval(() => {
@@ -141,24 +146,38 @@ for(let i = 0; i < bricksColCount; i++) {
         ball.ballX += ballDx
         ball.ballY += ballDy
     
-        if (ball.ballX + ballDx <= 0 || ball.ballX + ballDx + ballDiameter >= boardWidth) {
+        if (ball.ballX < 0 || ball.ballX + ballDiameter > boardWidth) {
             ballDx = -ballDx;
           }
         
-          if (ball.ballY + ballDy + ballDiameter >= boardHeight) {
+          if (ball.ballY < 0 || ball.ballY + ballDiameter > boardHeight) {
             ballDy = -ballDy;
           } 
     
-          if (ball.ballY + ballDy <= 0 ) {
-            if (ball.ballX > paddle.paddleX && ball.ballX < paddle.paddleX + paddle.width) {
-              ballDy = -ballDy;
-            } else {
-              alert("You lost");
-              document.location.reload();
-              clearInterval(interval);
-            }
+          if (ball.ballX + ballDiameter > paddle.paddleX &&
+             ball.ballX < paddle.paddleX + paddle.width &&
+             ball.ballY + ballDiameter > paddle.paddleY &&
+             ball.ballY < paddle.paddleY + paddle.height) {
+                ballDy = -ballDy;
+             }
+
+          
+          if (ball.ballY + ballDiameter > boardHeight) {
+            alert("You lost");
+            document.location.reload();
+            clearInterval(interval);
           }
 
+          for(let i = 0; i < bricks.length; i++) {
+            const brick = bricks[i]
+            
+            if(ball.ballX + ballDiameter > brick.brickX &&
+               ball.ballX < brick.width + brick.brickX &&
+                  ball.ballY + ballDiameter > brick.brickY &&
+                   ball.ballY < brick.height + brick.brickY) {
+                    ballDy = -ballDy
+                }
+          }
           
     }, 1)
     
@@ -199,3 +218,15 @@ for(let i = 0; i < bricksColCount; i++) {
     // //   }
     // const score = new Score();
     
+
+
+
+    // console.log('1', ball.ballX + ballDiameter > brick.brickX)
+    // console.log('2', ball.ballX < brick.height + brick.brickX)
+    // console.log('3', ball.ballY + ballDiameter > brick.brickY)
+    // console.log('4', ball.ballY < brick.height + brick.brickY)
+    // console.log('x',brick.brickX)
+    // console.log('y',brick.brickY)
+    // console.log('w',brick.height)
+    // console.log('h',brick.height)
+    // console.log('brick', brick)
