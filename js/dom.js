@@ -94,7 +94,7 @@ let ballX = 100/2
 let ballY = 10;
 
 
-setInterval(() => {
+const interval = setInterval(() => {
 
     ball.moveBall(ballX, ballY)
     ballX += ballDx
@@ -107,6 +107,16 @@ setInterval(() => {
       if (ballY + ballDy >= 100) {
         ballDy = -ballDy;
       } 
+
+      if (ballY + ballDy <= 0 ) { //- paddle.height > the 
+        if (ballX > paddle.paddleX && ballX < paddle.paddleX + paddle.width) {
+          ballDy = -ballDy;
+        } else {
+          alert("You lost");
+          document.location.reload();
+          clearInterval(interval);
+        }
+      }
 }, 20)
 
 
