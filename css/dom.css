@@ -24,39 +24,43 @@
     width: 100vw;
     height: 100vh; 
     position: absolute; */
-    /* border: 1px solid saddlebrown ; */
+    border: 2px solid green ;
     /* display: block; */
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    border: 1px solid black;
-    margin-top: 100px;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+    /* display: flex;
+    justify-content: left; */
 }
 
 
 
 
 #ball {
-background-color: mediumvioletred;
-display: block;
-background: black;
-border-radius: 50%;
-height: 40px;
-width: 40px;
-margin: 0;
-position: absolute;
+    background-color: mediumvioletred;
+    display: block;
+    background: black;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    position: absolute;
 }
 
-
+/* 
 #player {
 
-}
+} */
 
 .paddle {
-background-color: blueviolet;
-position: absolute;
-margin-bottom: 1vh;
-/* margin-left: 1vh; */
-margin-right: 1vh;
-justify-content: center;
+    background-color: blueviolet;
+    position: absolute;
+    margin-bottom: 30px;
+    /* bottom: 10px; */
+    /* width: 100px;
+    height: 20px; */
+    /* margin-bottom: 1vh;
+    margin-right: 1vh; */
 } 

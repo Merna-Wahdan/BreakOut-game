@@ -1,15 +1,18 @@
 window.addEventListener("load", (event) => {
 
 let body = document.getElementById('board')
+const boardWidth = 700;
+const boardHeight = 700;
+const ballDiameter = 30;
 
-console.log(body.width)
 
 class Paddle {
     constructor() {
-        this.width = 10;
-        this.height = 5;
-        this.paddleX = 50 - this.width/3;
-        this.paddleY = 0;
+        this.width = 120;
+        this.height = 20;
+        this.paddleX = boardWidth / 2 - this.width / 2;
+        this.paddleY = boardHeight - this.height - 5;
+        this.speed = 50
 
         this.createNewPaddle()
     }
@@ -17,13 +20,13 @@ class Paddle {
     createNewPaddle() {
         this.paddleElm = document.createElement('div')
         this.paddleElm.classList.add('paddle')
-        this.paddleElm.id = 'player'
+        // this.paddleElm.id = 'player'
 
         //Set position
-        this.paddleElm.style.width = this.width + "vw"
-        this.paddleElm.style.height = this.height + "vh"
-        this.paddleElm.style.left = this.paddleX + "vw"
-        this.paddleElm.style.bottom = this.paddleY+ "vh"
+        this.paddleElm.style.width = this.width + "px"
+        this.paddleElm.style.height = this.height + "px"
+        this.paddleElm.style.left = this.paddleX + "px"
+        this.paddleElm.style.top = this.paddleY + "px"
 
         const appendPaddle = document.getElementById("board")
         appendPaddle.appendChild(this.paddleElm)
@@ -34,22 +37,22 @@ class Paddle {
     setPositionBoundries() {
         if(this.paddleX <= 0) {
             this.paddleX = 0
-        } else if (this.paddleX >= 100 - this.width) {
-            this.paddleX = 100 - this.width
+        } else if (this.paddleX + this.width >= boardWidth) {
+            this.paddleX = boardWidth - this.width
         }
     }
 
     moveLeft() {
-            this.paddleX -= 10
+            this.paddleX -= this.speed
             this.setPositionBoundries()
-            this.paddleElm.style.left = this.paddleX + "vw"
+            this.paddleElm.style.left = this.paddleX + "px"
         }
         
         
     moveRight() {
-        this.paddleX += 10
+        this.paddleX += this.speed
         this.setPositionBoundries()
-        this.paddleElm.style.left = this.paddleX + "vw"
+        this.paddleElm.style.left = this.paddleX + "px"
 
     }
 
@@ -57,8 +60,8 @@ class Paddle {
 
 class Ball {
     constructor() {
-        this.ballX = 100/2 //50 - ((paddle.width + 2)/8);
-        this.ballY = 10;
+        this.ballX = boardWidth / 2 - paddle.width / 8 ;
+        this.ballY = paddle.height + 15;
 
         this.createNewBall()
     }
@@ -68,10 +71,9 @@ class Ball {
         this.ballElm.id = 'ball'
 
         //Set position
-        this.ballElm.style.width = this.width + "vw"
-        this.ballElm.style.height = this.height + "vh"
-        this.ballElm.style.left = this.ballX + "vw"
-        this.ballElm.style.bottom = this.ballY+ "vh"
+
+        this.ballElm.style.left = this.ballX + "px"
+        this.ballElm.style.bottom = this.ballY + "px"
 
         const appendPaddle = document.getElementById("board")
         appendPaddle.appendChild(this.ballElm)
@@ -80,36 +82,34 @@ class Ball {
 
 
     moveBall(x, y) {
-        this.ballElm.style.left = x + "vw"
-        this.ballElm.style.bottom = y + "vh"
+        this.ballElm.style.left = x + "px"
+        this.ballElm.style.bottom = y + "px"
     }
 }
 
 const paddle = new Paddle()
 
 const ball = new Ball()
-let ballDx = 1;
-let ballDy = 1;
-let ballX = 100/2 
-let ballY = 10;
+let ballDx = 2;
+let ballDy = 2;
 
 
 const interval = setInterval(() => {
 
-    ball.moveBall(ballX, ballY)
-    ballX += ballDx
-    ballY += ballDy
+    ball.moveBall(ball.ballX, ball.ballY)
+    ball.ballX += ballDx
+    ball.ballY += ballDy
 
-    if (ballX + ballDx <= 0 || ballX + ballDx >= 100) {
+    if (ball.ballX + ballDx <= 0 || ball.ballX + ballDx + ballDiameter >= boardWidth) {
         ballDx = -ballDx;
       }
     
-      if (ballY + ballDy >= 100) {
+      if (ball.ballY + ballDy + ballDiameter >= boardHeight) {
         ballDy = -ballDy;
       } 
 
-      if (ballY + ballDy <= 0 ) { //- paddle.height > the 
-        if (ballX > paddle.paddleX && ballX < paddle.paddleX + paddle.width) {
+      if (ball.ballY + ballDy <= 0 ) { //- paddle.height > the 
+        if (ball.ballX > paddle.paddleX && ball.ballX < paddle.paddleX + paddle.width) {
           ballDy = -ballDy;
         } else {
           alert("You lost");
@@ -117,7 +117,7 @@ const interval = setInterval(() => {
           clearInterval(interval);
         }
       }
-}, 20)
+}, 1)
 
 
 
