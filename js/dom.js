@@ -4,6 +4,11 @@ window.addEventListener("load", (event) => {
     const boardWidth = 700;
     const boardHeight = 700;
     const ballDiameter = 30;
+    const bricksColCount = 7;
+    const bricksRowsCount = 3;
+    const totalBricks = bricksColCount * bricksRowsCount
+    const brickWidth = 85;
+    const brickHeight = 30;
     
     
     class Paddle {
@@ -75,8 +80,8 @@ window.addEventListener("load", (event) => {
             this.ballElm.style.left = this.ballX + "px"
             this.ballElm.style.bottom = this.ballY + "px"
     
-            const appendPaddle = document.getElementById("board")
-            appendPaddle.appendChild(this.ballElm)
+            const board = document.getElementById("board")
+            board.appendChild(this.ballElm)
     
         }
     
@@ -87,9 +92,45 @@ window.addEventListener("load", (event) => {
         }
     }
     
+    class Brick {
+        constructor(x, y) {
+            this.width = brickWidth;
+            this.height = brickHeight;
+            this.brickX = x;
+            this.brickY = y;
+    
+            this.createNewBrick()
+        }
+    
+        createNewBrick() {
+            this.brickElm = document.createElement('div')
+            this.brickElm.classList.add('brick')
+            //Set position
+            this.brickElm.style.width = this.width + "px"
+            this.brickElm.style.height = this.height + "px"
+            this.brickElm.style.left = this.brickX + "px"
+            this.brickElm.style.top = this.brickY + "px"
+            const board = document.getElementById("board")
+            board.appendChild(this.brickElm)
+    
+        }
+    }
     const paddle = new Paddle()
     
     const ball = new Ball()
+
+const bricks = []
+
+for(let i = 0; i < bricksColCount; i++) {
+    for(let j = 0; j < bricksRowsCount; j++) {
+        const bX = i * (brickWidth+ 10) + 10
+        const bY = j * (brickHeight + 5) + 10
+        const brick = new Brick(bX, bY)
+        bricks.push(brick)
+
+    }
+}
+    
     let ballDx = 2;
     let ballDy = 2;
     
@@ -108,7 +149,7 @@ window.addEventListener("load", (event) => {
             ballDy = -ballDy;
           } 
     
-          if (ball.ballY + ballDy <= 0 ) { //- paddle.height > the 
+          if (ball.ballY + ballDy <= 0 ) {
             if (ball.ballX > paddle.paddleX && ball.ballX < paddle.paddleX + paddle.width) {
               ballDy = -ballDy;
             } else {
@@ -117,6 +158,8 @@ window.addEventListener("load", (event) => {
               clearInterval(interval);
             }
           }
+
+          
     }, 1)
     
     

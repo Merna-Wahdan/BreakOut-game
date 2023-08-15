@@ -64,3 +64,8 @@
     /* margin-bottom: 1vh;
     margin-right: 1vh; */
 } 
+
+.brick {
+    background-color : purple;
+    position: absolute;
+}
