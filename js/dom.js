@@ -2,7 +2,7 @@ window.addEventListener("load", (event) => {
   let body = document.getElementById("board");
   const boardWidth = 900;
   const boardHeight = 700;
-  const boardPadding = 5;
+  const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 30;
   const bricksColCount = 13;
@@ -32,7 +32,7 @@ mute.addEventListener("click", () => {
 
   class Paddle {
     constructor() {
-      this.width = 300;
+      this.width = 600;
       this.height = 10;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
@@ -166,7 +166,7 @@ mute.addEventListener("click", () => {
 
   //Ball horizontal & vertical velocity
   let ballDx = 2;
-  let ballDy = 2;
+  let ballDy = -2;   ////////////>>>>>>>>>>
 
   const interval = setInterval(() => {
     ball.moveBall(ball.ballX, ball.ballY);
@@ -192,17 +192,21 @@ mute.addEventListener("click", () => {
       ball.ballY + ballDiameter >= paddle.paddleY  && 
       ball.ballY <= paddle.paddleY + paddle.height
     ) {
-        console.log("Ball:", ball.ballX, ball.ballY);
-        console.log("Paddle:", paddle.paddleX, paddle.paddleY);
-        console.log("Collision:", ball.ballX + ballDiameter >= paddle.paddleX,
-            ball.ballX < paddle.paddleX + paddle.width,
-            ball.ballY + ballDiameter >= paddle.paddleY,
-            ball.ballY + ballDiameter <= paddle.paddleY + paddle.height);
+        // console.log("Ball:", ball.ballX, ball.ballY);
+        // console.log("Paddle:", paddle.paddleX, paddle.paddleY);
+        // console.log("Collision:", ball.ballX + ballDiameter >= paddle.paddleX,
+        //     ball.ballX < paddle.paddleX + paddle.width,
+        //     ball.ballY + ballDiameter >= paddle.paddleY,
+        //     ball.ballY + ballDiameter <= paddle.paddleY + paddle.height);
 
       ballDy = -ballDy;
+        
+    //   if(ball.ballY >= 655) {
+    //     ball.ballY = 654
+    //   }
       paddleAudio.play();
-      
     }
+
 
     if (ball.ballY + ballDiameter > boardHeight) {
       alert("You lost");
