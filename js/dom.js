@@ -208,7 +208,10 @@ for(let i = 0; i < bricksColCount; i++) {
                 }     
           }
           
-      
+          if(score.hits === totalBricks) {
+            alert("You won");
+            document.location.reload();
+        }
           
     }, 1)
     
