@@ -1,7 +1,11 @@
 window.addEventListener("load", (event) => {
   let body = document.getElementById("board");
-  const boardWidth = 900;
+  const boardWidth = 920;
   const boardHeight = 700;
+  body.style.width = boardWidth + "px"
+  body.style.height = boardHeight + "px"
+  
+
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 30;
