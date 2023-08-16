@@ -1,23 +1,23 @@
 window.addEventListener("load", (event) => {
 
     let body = document.getElementById('board')
-    const boardWidth = 700;
+    const boardWidth = 900;
     const boardHeight = 700;
     const ballDiameter = 30;
-    const bricksColCount = 7;
-    const bricksRowsCount = 3;
+    const bricksColCount = 13;
+    const bricksRowsCount = 8;
     const totalBricks = bricksColCount * bricksRowsCount
-    const brickWidth = 85;
-    const brickHeight = 30;
+    const brickWidth = 65;
+    const brickHeight = 20;
     
     
     class Paddle {
         constructor() {
-            this.width = 300;
-            this.height = 20;
+            this.width = boardWidth;
+            this.height = 10;
             this.paddleX = boardWidth / 2 - this.width / 2;
             this.paddleY = boardHeight - this.height - 5;
-            this.speed = 50
+            this.speed = 70
     
             this.createNewPaddle()
         }
@@ -150,8 +150,8 @@ const bricks = []
 
 for(let i = 0; i < bricksColCount; i++) {
     for(let j = 0; j < bricksRowsCount; j++) {
-        const bX = i * (brickWidth+ 10) + 10
-        const bY = j * (brickHeight + 5) + 10
+        const bX = i * (brickWidth + 4) + 5
+        const bY = j * (brickHeight + 5) + 5
         const brick = new Brick(bX, bY)
         bricks.push(brick)
 
