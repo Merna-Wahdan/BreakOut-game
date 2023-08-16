@@ -120,9 +120,21 @@ window.addEventListener("load", (event) => {
     
         }
     }
+
+
+    class Score {
+        constructor() {
+          this.score = 0
+        }
+      
+    }
+    
     const paddle = new Paddle()
     
     const ball = new Ball()
+
+    const score = new Score();
+
 
 const bricks = []
 
@@ -195,11 +207,4 @@ for(let i = 0; i < bricksColCount; i++) {
     
     });    
 
-    // class Score {
-    //     constructor() {
-    //       this.score = 0
-    //     }
-      
     
-    // //   }
-    // const score = new Score();
