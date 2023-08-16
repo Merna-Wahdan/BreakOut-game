@@ -37,7 +37,7 @@ mute.addEventListener("click", () => {
   class Paddle {
     constructor() {
       this.width = 600;
-      this.height = 10;
+      this.height = 15;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
       this.speed = 70;
@@ -253,3 +253,4 @@ mute.addEventListener("click", () => {
     }
   });
 });
+

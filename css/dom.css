@@ -1,7 +1,11 @@
+/* @import url('https://fonts.cdnfonts.com/css/games'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #1b1818;
+    background-color:#181717;
     position: relative;    
 }
 
@@ -38,7 +42,7 @@ body {
     /* display: flex;
     justify-content: left; */
     /* cursor: none; */
-    background-color: antiquewhite;
+    background-color: #03071E;
     border-radius: 5px;
     padding-bottom: 10px;
 }
@@ -49,14 +53,14 @@ body {
 #ball {
     background-color: mediumvioletred;
     display: block;
-    background: black;
+    background: rgb(80, 13, 13);
     border-radius: 50%;
     height: 20px;
     width: 20px;
     margin: 0;
     position: absolute;
+    transition: box-shadow 0.5s ease-in-out;
 }
-
 
 /* 
 #player {
@@ -64,10 +68,10 @@ body {
 } */
 
 .paddle {
-    background-color: blueviolet;
+    background-color: #50394c;
     position: absolute;
     margin-bottom: 30px;
-    border-radius: 10px;
+    border-radius: 3px;
     /* bottom: 10px; */
     /* width: 100px;
     height: 20px; */
@@ -76,7 +80,69 @@ body {
 } 
 
 .brick {
-    background-color : purple;
+    background-color : black;
     position: absolute;
     border-radius: 2px;
 }
+
+.start {
+    position: relative;
+    width: 920px;
+    height: 700px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #FFBA08;
+    border-radius: 5px;
+    padding-bottom: 10px;
+
+}
+
+h1 {
+    color: #50394c;
+    /* font-family: 'Games', sans-serif; */
+    /* font-family: 'Press Start 2P';                                   */
+    font-family: 'Bungee Spice', cursive;
+    font-size: 100px;
+    position: absolute;
+    text-align: center;
+    top: 200px;
+    left: 0;
+    right: 0;
+    
+}
+
+#clickToStart {
+    color: #50394c;
+    font-family: 'Games', sans-serif;
+    /* font-family: 'Press Start 2P'; */
+    font-size: 30px;
+    position: absolute;
+    text-align: center;
+    bottom: 210px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    white-space: nowrap;
+    cursor: pointer;
+    
+}
+
+
+#options {
+    /* border: 2px solid black; */
+    position: absolute;
+    font-family: 'Games', sans-serif;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+        border: none;
+        background-color: #333;
+        color: #f4e1d2;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(234, 76, 14, 0.5); 
+        transition: box-shadow 0.3s ease-in-out; 
+    }
+    
+
