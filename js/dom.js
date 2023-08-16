@@ -113,11 +113,12 @@ mute.addEventListener("click", () => {
   }
 
   class Brick {
-    constructor(x, y) {
+    constructor(x, y, color) {
       this.width = brickWidth;
       this.height = brickHeight;
       this.brickX = x;
       this.brickY = y;
+      this.color = color;
 
       this.createNewBrick();
     }
@@ -130,6 +131,7 @@ mute.addEventListener("click", () => {
       this.brickElm.style.height = this.height + "px";
       this.brickElm.style.left = this.brickX + "px";
       this.brickElm.style.top = this.brickY + "px";
+      this.brickElm.style.background = this.color;
       const board = document.getElementById("board");
       board.appendChild(this.brickElm);
     }
@@ -158,12 +160,13 @@ mute.addEventListener("click", () => {
   //     }
 
   const bricks = [];
+  const colors = ["#F94144", "#F3722C", "#F8961E", "#F9844A", "#F9C74F", "#90BE6D", "#43AA8B", "#4D908E"];
 
   for (let i = 0; i < bricksColCount; i++) {
     for (let j = 0; j < bricksRowsCount; j++) {
       const bX = i * (brickWidth + 5.5) + boardMargin;
       const bY = j * (brickHeight + 5) + boardPadding;
-      const brick = new Brick(bX, bY);
+      const brick = new Brick(bX, bY, colors[j]);
       bricks.push(brick);
     }
   }
