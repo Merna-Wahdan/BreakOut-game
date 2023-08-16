@@ -13,7 +13,7 @@ window.addEventListener("load", (event) => {
     
     class Paddle {
         constructor() {
-            this.width = 120;
+            this.width = 300;
             this.height = 20;
             this.paddleX = boardWidth / 2 - this.width / 2;
             this.paddleY = boardHeight - this.height - 5;
@@ -124,16 +124,26 @@ window.addEventListener("load", (event) => {
 
     class Score {
         constructor() {
-          this.score = 0
+          this.hits = 0
         }
-      
-    }
+
+        increaseScore() {
+            this.hits += 1
+            document.getElementById('hits').innerHTML = this.hits
+        }
+        }
     
+
     const paddle = new Paddle()
     
     const ball = new Ball()
 
     const score = new Score();
+
+    // if () {
+    //     document.getElementById("hits").innerText =
+    //     score.hits;
+    //     }
 
 
 const bricks = []
@@ -185,13 +195,20 @@ for(let i = 0; i < bricksColCount; i++) {
             
             if(ball.ballX + ballDiameter > brick.brickX &&
                ball.ballX < brick.width + brick.brickX &&
-                  ball.ballY + ballDiameter > brick.brickY &&
-                   ball.ballY < brick.height + brick.brickY) {
+               ball.ballY + ballDiameter > brick.brickY &&
+               ball.ballY < brick.height + brick.brickY) {
+
                     ballDy = -ballDy
+
+                    score.increaseScore()
+
                     brick.brickElm.remove();
                     bricks.splice(i, 1);
-                }
+                
+                }     
           }
+          
+      
           
     }, 1)
     
