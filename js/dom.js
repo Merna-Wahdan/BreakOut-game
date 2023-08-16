@@ -11,9 +11,24 @@ window.addEventListener("load", (event) => {
   const brickWidth = 65;
   const brickHeight = 20;
 
+  let mute = document.getElementById('mute');
+  let audioElements = document.getElementsByTagName('audio')
+  let isMuted = false
   let paddleAudio = document.getElementById("paddleAudio");
   let hitWallAudio = document.getElementById("hitWallAudio");
   let brickHitAudio = document.getElementById("brickHitAudio");
+//   let backgroundAudio = document.getElementById("background")
+//   backgroundAudio.volume = 0.5 
+
+mute.addEventListener("click", () => {
+    isMuted = !isMuted
+
+    for(const audioElement of audioElements) {
+        audioElement.muted = isMuted
+    }
+
+    mute.textContent = isMuted ? "Unmuted" : "Muted"
+})
 
   class Paddle {
     constructor() {
@@ -174,11 +189,19 @@ window.addEventListener("load", (event) => {
     if (
       ball.ballX + ballDiameter >= paddle.paddleX &&
       ball.ballX <= paddle.paddleX + paddle.width &&
-      ball.ballY + ballDiameter >= paddle.paddleY && 
+      ball.ballY + ballDiameter >= paddle.paddleY  && 
       ball.ballY <= paddle.paddleY + paddle.height
     ) {
+        console.log("Ball:", ball.ballX, ball.ballY);
+        console.log("Paddle:", paddle.paddleX, paddle.paddleY);
+        console.log("Collision:", ball.ballX + ballDiameter >= paddle.paddleX,
+            ball.ballX < paddle.paddleX + paddle.width,
+            ball.ballY + ballDiameter >= paddle.paddleY,
+            ball.ballY + ballDiameter <= paddle.paddleY + paddle.height);
+
       ballDy = -ballDy;
       paddleAudio.play();
+      
     }
 
     if (ball.ballY + ballDiameter > boardHeight) {
