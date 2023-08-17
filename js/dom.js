@@ -10,6 +10,7 @@ window.addEventListener("load", (event) => {
    //Ball horizontal & vertical velocity
   let ballDx = 2;
   let ballDy = -2; 
+  let increaseBallSpeed = false;
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
@@ -38,7 +39,7 @@ mute.addEventListener("click", () => {
 
   class Paddle {
     constructor() {
-      this.width = 120;
+      this.width = 150;
       this.height = 15;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
@@ -121,6 +122,7 @@ mute.addEventListener("click", () => {
       ball.moveBall(boardWidth / 2 - ballDiameter / 2, boardHeight / 2 - ballDiameter / 2);
       ballDx = ballDx //Math.abs(ballDx); // Reset horizontal velocity
       ballDy = ballDy //-Math.abs(ballDy); // Reset vertical velocity
+      increaseBallSpeed = false //reset speed to noraml
   }
   }
 
@@ -278,17 +280,29 @@ mute.addEventListener("click", () => {
 
         score.increaseScore();
 
+
         brick.brickElm.remove();
         bricks.splice(i, 1);
+        if(score.hits >= 10 && score.hits % 10 === 0) { 
+          ballDx += 1
+          ballDy += 1
+          increaseBallSpeed = true
+          console.log('x', ballDx)
+          console.log('y', ballDy)
+
+    }
       }
     }
 
+    // if(score.hits >= 5 && score.hits % 5 === 0) { 
+    //   ballDx += 1.5
+    //   ballDy += 1.5
+    //   increaseBallSpeed = true
+    //   console.log('x', ballDx)
+    //   console.log('y', ballDy)
 
-    // if (score.hits >= 2) {
-    //     ballDx = 3;
-    //     ballDy = 3;
     // }
-    // document.getElementById("hits").innerText = score.hits;
+    
 
 
     if (score.hits === totalBricks) {
