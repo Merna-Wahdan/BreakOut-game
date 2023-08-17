@@ -9,6 +9,9 @@ window.addEventListener("load", (event) => {
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 30;
+   //Ball horizontal & vertical velocity
+   let ballDx = 3;
+   let ballDy = -3; 
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
@@ -154,6 +157,7 @@ mute.addEventListener("click", () => {
 
   const score = new Score();
 
+  
   // if () {
   //     document.getElementById("hits").innerText =
   //     score.hits;
@@ -171,9 +175,7 @@ mute.addEventListener("click", () => {
     }
   }
 
-  //Ball horizontal & vertical velocity
-  let ballDx = 2;
-  let ballDy = -2;   ////////////>>>>>>>>>>
+
 
   const interval = setInterval(() => {
     ball.moveBall(ball.ballX, ball.ballY);
@@ -199,12 +201,6 @@ mute.addEventListener("click", () => {
       ball.ballY + ballDiameter >= paddle.paddleY  && 
       ball.ballY <= paddle.paddleY + paddle.height
     ) {
-        // console.log("Ball:", ball.ballX, ball.ballY);
-        // console.log("Paddle:", paddle.paddleX, paddle.paddleY);
-        // console.log("Collision:", ball.ballX + ballDiameter >= paddle.paddleX,
-        //     ball.ballX < paddle.paddleX + paddle.width,
-        //     ball.ballY + ballDiameter >= paddle.paddleY,
-        //     ball.ballY + ballDiameter <= paddle.paddleY + paddle.height);
 
       ballDy = -ballDy;
         
@@ -239,6 +235,14 @@ mute.addEventListener("click", () => {
         bricks.splice(i, 1);
       }
     }
+
+
+    // if (score.hits >= 2) {
+    //     ballDx = 3;
+    //     ballDy = 3;
+    // }
+    // document.getElementById("hits").innerText = score.hits;
+
 
     if (score.hits === totalBricks) {
       alert("You won");

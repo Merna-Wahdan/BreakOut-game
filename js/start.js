@@ -1,6 +1,6 @@
 
 const clickToStart = document.getElementById("clickToStart");
-const options = document.getElementById("options")
+// const options = document.getElementById("options")
 const startSound = document.getElementById("startSound")
 let isVisible = true;
 
@@ -17,3 +17,10 @@ clickToStart.addEventListener("click", () => {
     location.href = "./game.html";
 })
 
+clickToStart.addEventListener("click", () => {
+   
+
+    startSound.pause(); 
+    startSound.currentTime = 0; 
+
+});

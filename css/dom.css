@@ -17,7 +17,7 @@ body {
     /* width: 100px;
     padding-left: 250px; */
     margin: 50px;
-    color: antiquewhite;
+    color:  #FFBA08;
 
   }
 
@@ -41,7 +41,7 @@ body {
     margin-top: 20px;
     /* display: flex;
     justify-content: left; */
-    /* cursor: none; */
+    cursor: none;
     background-color: black;
     border-radius: 5px;
     padding-bottom: 10px;
@@ -92,6 +92,8 @@ body {
     background-color: #FFBA08;
     border-radius: 5px;
     padding-bottom: 10px;
+    cursor: alias;
+
 
 }
 
