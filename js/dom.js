@@ -4,19 +4,18 @@ window.addEventListener("load", (event) => {
   const boardHeight = 700;
   body.style.width = boardWidth + "px"
   body.style.height = boardHeight + "px"
-  
-
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 30;
    //Ball horizontal & vertical velocity
-   let ballDx = 10;
-   let ballDy = -10; 
+  let ballDx = 10;
+  let ballDy = -10; 
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
   const brickWidth = 65;
   const brickHeight = 20;
+  // let hearts = 3;
 
   let mute = document.getElementById('mute');
   let audioElements = document.getElementsByTagName('audio')
@@ -39,7 +38,7 @@ mute.addEventListener("click", () => {
 
   class Paddle {
     constructor() {
-      this.width = boardWidth;
+      this.width = 120;
       this.height = 15;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
@@ -158,11 +157,25 @@ mute.addEventListener("click", () => {
     }
   }
 
+  class Heart {
+    constructor() {
+      this.heart = 3;
+    }
+
+    decreaseHeart() {
+      this.heart -= 1;
+      document.getElementById("count").innerHTML = this.heart;
+    }
+  }
+
+
   const paddle = new Paddle();
 
   const ball = new Ball();
 
   const score = new Score();
+  const heart = new Heart();
+
 
   
   // if () {
@@ -221,7 +234,8 @@ mute.addEventListener("click", () => {
 
 
     if (ball.ballY + ballDiameter > boardHeight) {
-      alert("You lost");
+      // alert("You lost");
+      heart.heart = 2;
       document.location.reload();
       clearInterval(interval);
     }
