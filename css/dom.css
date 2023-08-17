@@ -1,6 +1,4 @@
-/* @import url('https://fonts.cdnfonts.com/css/games'); */
-
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Chewy&family=Handjet:wght@300&family=Nunito+Sans:opsz,wght@6..12,200&family=Orbitron:wght@500;600&display=swap');
 
 body {
     margin: 0;
@@ -30,11 +28,11 @@ body {
 
   }
 
-  #mute {
+  /* #mute {
     position: absolute;
     margin: 50px;
     right: 50px;     
-  }
+  } */
  
 #board {
     /* background-color: white;
@@ -67,25 +65,40 @@ body {
     width: 20px;
     margin: 0;
     position: absolute;
+    display: block;
     transition: box-shadow 0.5s ease-in-out;
-}
+    box-shadow: 0 0 20px #fff;
 
-/* 
-#player {
-
-} */
-
-.paddle {
-    background-color: rgb(91, 89, 89);
-    position: absolute;
-    margin-bottom: 30px;
-    border-radius: 3px;
-    /* bottom: 10px; */
-    /* width: 100px;
-    height: 20px; */
-    /* margin-bottom: 1vh;
-    margin-right: 1vh; */
 } 
+
+
+
+    
+
+
+
+
+    .paddle {
+        background-color: hsl(205, 15%, 28%);
+        width: 150px;
+        height: 15px;
+        position: relative;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #fff
+      }
+      
+      .paddle::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        box-shadow: 0 0 20px 5px hsl(205, 15%, 28%);
+        opacity: 0;
+      }
+
 
 .brick {
     position: absolute;
@@ -122,8 +135,7 @@ h1 {
 
 #clickToStart {
     color: #50394c;
-    font-family: 'Games', sans-serif;
-    /* font-family: 'Press Start 2P'; */
+    font-family: 'Handjet', cursive;
     font-size: 20px;
     position: absolute;
     text-align: center;
@@ -133,25 +145,25 @@ h1 {
     width: 100%;
     white-space: nowrap;
     cursor: pointer;
-    
 }
 
 
-#options {
-    /* border: 2px solid black; */
-    position: absolute;
-    font-family: 'Games', sans-serif;
-    bottom: 150px;
-    left: 50%;
-    transform: translateX(-50%);
+#mute {
+        position: absolute;
+        font-family: 'Games', sans-serif;
+        font-size: 30px;
+        text-align: center;
+        margin-top: 5px;
+        right: 200px; 
         border: none;
-        background-color: #333;
+        background-color: #4D908E;
         color: #f4e1d2;
-        padding: 10px 20px;
+        /* padding: 10px 20px; */
         border-radius: 5px;
         cursor: pointer;
         box-shadow: 0 0 20px rgba(234, 76, 14, 0.5); 
-        transition: box-shadow 0.3s ease-in-out; 
+        /* transition: box-shadow 0.3s ease-in-out;  */
     }
     
-
+    
+    

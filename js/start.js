@@ -1,10 +1,8 @@
-
 const clickToStart = document.getElementById("clickToStart");
 const clickStart = document.getElementById("clickStart")
 
 
 let isVisible = true;
-let isRedirecting = false;
 
 
 setInterval(() => {

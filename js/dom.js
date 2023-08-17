@@ -6,7 +6,7 @@ window.addEventListener("load", (event) => {
   body.style.height = boardHeight + "px"
   const boardPadding = 7;
   const boardMargin = 5;
-  const ballDiameter = 30;
+  const ballDiameter = 20;
    //Ball horizontal & vertical velocity
   let ballDx = 2;
   let ballDy = -2; 
@@ -34,7 +34,7 @@ mute.addEventListener("click", () => {
         audioElement.muted = isMuted
     }
 
-    mute.textContent = isMuted ? "Unmuted" : "Muted"
+    mute.textContent = isMuted ? "🔊" : "🔇"
 })
 
   class Paddle {
@@ -193,6 +193,8 @@ mute.addEventListener("click", () => {
   const score = new Score();
   const heart = new Heart();
 
+  let updatesSinceLastBounce = 0;
+
 
   
   // if () {
@@ -215,6 +217,7 @@ mute.addEventListener("click", () => {
 
 
   const interval = setInterval(() => {
+    updatesSinceLastBounce++;
     ball.moveBall(ball.ballX, ball.ballY);
     ball.ballX += ballDx;
     ball.ballY += ballDy;
@@ -224,7 +227,6 @@ mute.addEventListener("click", () => {
       ball.ballX + ballDiameter / 2 > boardWidth
     ) {
       ballDx = -ballDx;
-      //hitWallAudio.volume = 0.1;
 
       hitWallAudio.play();
     }
@@ -247,10 +249,11 @@ mute.addEventListener("click", () => {
       ball.ballX + ballDiameter >= paddle.paddleX &&
       ball.ballX <= paddle.paddleX + paddle.width &&
       ball.ballY + ballDiameter >= paddle.paddleY  && 
-      ball.ballY <= paddle.paddleY + paddle.height
+      ball.ballY <= paddle.paddleY + paddle.height && 
+      updatesSinceLastBounce > 10
     ) {
-
       ballDy = -ballDy;
+      updatesSinceLastBounce = 0;
         
     //   if(ball.ballY >= 655) {
     //     ball.ballY = 654
@@ -277,6 +280,8 @@ mute.addEventListener("click", () => {
       ) {
         ballDy = -ballDy;
         brickHitAudio.play();
+        brickHitAudio.volume = 0.3;
+
 
         score.increaseScore();
 
