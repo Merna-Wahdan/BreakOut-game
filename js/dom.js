@@ -8,8 +8,8 @@ window.addEventListener("load", (event) => {
   const boardMargin = 5;
   const ballDiameter = 30;
    //Ball horizontal & vertical velocity
-  let ballDx = 10;
-  let ballDy = -10; 
+  let ballDx = 2;
+  let ballDy = -2; 
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
@@ -92,11 +92,8 @@ mute.addEventListener("click", () => {
 
   class Ball {
     constructor() {
-      // this.ballX = boardWidth / 2 - paddle.width / 8 ;
-      // this.ballY = paddle.height + 15;
-      this.ballX = 290;
-      this.ballY = 360;
-
+      this.ballX = boardWidth / 2 - ballDiameter / 2 //290;
+      this.ballY = boardHeight / 2 - ballDiameter / 2 //360;
       this.createNewBall();
     }
 
@@ -119,6 +116,12 @@ mute.addEventListener("click", () => {
       this.ballElm.style.left = x + "px";
       this.ballElm.style.top = y + "px";
     }
+
+    resetBall() {
+      ball.moveBall(boardWidth / 2 - ballDiameter / 2, boardHeight / 2 - ballDiameter / 2);
+      ballDx = ballDx //Math.abs(ballDx); // Reset horizontal velocity
+      ballDy = ballDy //-Math.abs(ballDy); // Reset vertical velocity
+  }
   }
 
   class Brick {
@@ -229,6 +232,7 @@ mute.addEventListener("click", () => {
     } else if (ball.ballY + ballDiameter >= boardHeight) {
       ballDy = -ballDy;
       heart.decreaseHeart()
+     ball.resetBall()
       // if(heart.heart.length === 0) {
       //   alert("You lost");
       // document.location.reload();
