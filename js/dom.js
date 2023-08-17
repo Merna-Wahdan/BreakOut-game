@@ -2,8 +2,8 @@ window.addEventListener("load", (event) => {
   let body = document.getElementById("board");
   const boardWidth = 920;
   const boardHeight = 700;
-  body.style.width = boardWidth + "px"
-  body.style.height = boardHeight + "px"
+  body.style.width = boardWidth + "px";
+  body.style.height = boardHeight + "px";
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 20;
@@ -171,7 +171,7 @@ mute.addEventListener("click", () => {
     constructor() {
       this.heart = ["♡", "♡", "♡"];
       this.gameOverModal = document.getElementsByClassName("modal")[0];
-      this.gameWon = document.getElementsByClassName("modal")[1];
+      this.gameWonModal = document.getElementsByClassName("modal")[1];
       this.updateHeartDisplay()
     }
 
@@ -196,11 +196,14 @@ mute.addEventListener("click", () => {
       })
     }
 
-    
-
-    // showGameWonModal() {
-
-    // }
+    showGameWonModal() {
+      this.gameWonModal.style.display = "flex"
+      const playAgain = document.getElementById('playAgain')
+      playAgain.addEventListener("click", () => {
+        document.location.reload();
+        clearInterval(interval);
+      })
+    }
   }
 
 
@@ -340,8 +343,7 @@ mute.addEventListener("click", () => {
 
 
     if (score.hits === totalBricks) {
-      alert("You won");
-      document.location.reload();
+      heart.showGameWonModal()
       clearInterval(interval);
 
     }

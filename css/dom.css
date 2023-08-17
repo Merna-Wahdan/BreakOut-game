@@ -78,7 +78,7 @@ body {
         position: relative;
         margin-top: 20px;
         border-radius: 10px;
-        box-shadow: 0 0 20px #fff
+        box-shadow: 0 0 20px #fff;
       }
       
       .paddle::before {
@@ -182,7 +182,7 @@ h1 {
 }
 
 
-#restart {
+#restart, #playAgain {
     color: #50394c;
     font-family: 'Handjet', cursive;
     font-size: 40px;
@@ -193,4 +193,8 @@ h1 {
     border: none;
     border-radius: 10px;
     padding: 5px;
+}
+
+#playAgain {
+    padding: 0px 10px;
 }
