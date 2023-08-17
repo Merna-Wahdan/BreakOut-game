@@ -1,26 +1,40 @@
 
 const clickToStart = document.getElementById("clickToStart");
-// const options = document.getElementById("options")
-const startSound = document.getElementById("startSound")
-let isVisible = true;
+const clickStart = document.getElementById("clickStart")
 
-startSound.play()
-startSound.volume = 0.5;
+
+let isVisible = true;
+let isRedirecting = false;
+
 
 setInterval(() => {
     isVisible = !isVisible;
     clickToStart.style.visibility = isVisible ? "visible" : "hidden";
-    // options.style.visibility = isVisible ? "visible" : "hidden";
 }, 500);
 
 clickToStart.addEventListener("click", () => {
-    location.href = "./game.html";
+    clickStart.play()
+
+    setTimeout(() => {
+        location.href = "./game.html";
+
+    }, 400) 
 })
 
-clickToStart.addEventListener("click", () => {
-   
 
-    startSound.pause(); 
-    startSound.currentTime = 0; 
 
-});
+
+
+
+
+
+
+
+
+
+
+// startSound.play()
+// startSound.volume = 0.5;
+
+// const options = document.getElementById("options")
+// options.style.visibility = isVisible ? "visible" : "hidden";

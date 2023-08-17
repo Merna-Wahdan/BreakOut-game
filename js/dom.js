@@ -10,8 +10,8 @@ window.addEventListener("load", (event) => {
   const boardMargin = 5;
   const ballDiameter = 30;
    //Ball horizontal & vertical velocity
-   let ballDx = 3;
-   let ballDy = -3; 
+   let ballDx = 10;
+   let ballDy = -10; 
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
@@ -39,11 +39,14 @@ mute.addEventListener("click", () => {
 
   class Paddle {
     constructor() {
-      this.width = 150;
+      this.width = boardWidth;
       this.height = 15;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
       this.speed = 70;
+    //   this.paddingTop = 4 + "px";
+    //   this.paddingLeft = 4 + "px";
+    //   this.paddingRight = 4 + "px";
 
       this.createNewPaddle();
     }
@@ -58,6 +61,10 @@ mute.addEventListener("click", () => {
       this.paddleElm.style.height = this.height + "px";
       this.paddleElm.style.left = this.paddleX + "px";
       this.paddleElm.style.top = this.paddleY + "px";
+      this.paddleElm.style.paddingTop = this.paddingTop
+      this.paddleElm.style.paddingLeft = this.paddingLeft
+      this.paddleElm.style.paddingRight = this.paddingRight
+
 
       const appendPaddle = document.getElementById("board");
       appendPaddle.appendChild(this.paddleElm);
@@ -187,10 +194,12 @@ mute.addEventListener("click", () => {
       ball.ballX + ballDiameter / 2 > boardWidth
     ) {
       ballDx = -ballDx;
+      //hitWallAudio.volume = 0.1;
+
       hitWallAudio.play();
     }
 
-    if (ball.ballY < 0 || ball.ballY + ballDiameter > boardHeight) {
+    if (ball.ballY < 0 || ball.ballY + ballDiameter >= boardHeight) {
       ballDy = -ballDy;
     }
 

@@ -123,7 +123,8 @@ const interval = setInterval(() => {
   ballX += ballDx;
   ballY += ballDy;
 
-  if (ballX + ballDx - ball.r <= 0 || ballX + ballDx + ball.r >= canvas.width) {
+  if (ballX + ballDx - ball.r <= 0 || 
+    ballX + ballDx + ball.r >= canvas.width) {
     ballDx = -ballDx;
   }
 
