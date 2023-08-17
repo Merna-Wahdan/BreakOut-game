@@ -7,15 +7,17 @@ window.addEventListener("load", (event) => {
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 20;
+  let isBouncing = false;
    //Ball horizontal & vertical velocity
-  let ballDx = 2;
-  let ballDy = -2; 
+  let ballDx = 3;
+  let ballDy = -3; 
   let increaseBallSpeed = false;
   const bricksColCount = 13;
   const bricksRowsCount = 8;
   const totalBricks = bricksColCount * bricksRowsCount;
   const brickWidth = 65;
   const brickHeight = 20;
+
   // let hearts = 3;
 
   let mute = document.getElementById('mute');
@@ -24,6 +26,8 @@ window.addEventListener("load", (event) => {
   let paddleAudio = document.getElementById("paddleAudio");
   let hitWallAudio = document.getElementById("hitWallAudio");
   let brickHitAudio = document.getElementById("brickHitAudio");
+  let gameOver = document.getElementById("gameOver")
+  let gameWon = document.getElementById("gameWon")
 //   let backgroundAudio = document.getElementById("background")
 //   backgroundAudio.volume = 0.5 
 
@@ -120,8 +124,8 @@ mute.addEventListener("click", () => {
 
     resetBall() {
       ball.moveBall(boardWidth / 2 - ballDiameter / 2, boardHeight / 2 - ballDiameter / 2);
-      ballDx = ballDx //Math.abs(ballDx); // Reset horizontal velocity
-      ballDy = ballDy //-Math.abs(ballDy); // Reset vertical velocity
+      ballDx = 3 //Math.abs(ballDx); // Reset horizontal velocity
+      ballDy = -3 //-Math.abs(ballDy); // Reset vertical velocity
       increaseBallSpeed = false //reset speed to noraml
   }
   }
@@ -154,6 +158,7 @@ mute.addEventListener("click", () => {
   class Score {
     constructor() {
       this.hits = 0;
+      
     }
 
     increaseScore() {
@@ -165,24 +170,37 @@ mute.addEventListener("click", () => {
   class Heart {
     constructor() {
       this.heart = ["♡", "♡", "♡"];
+      this.gameOverModal = document.getElementsByClassName("modal")[0];
+      this.gameWon = document.getElementsByClassName("modal")[1];
       this.updateHeartDisplay()
     }
 
     decreaseHeart() {
       this.heart.pop();
-      this.updateHeartDisplay()
+      this.updateHeartDisplay();
+      this.checkGameOver;
 
-      if(heart.heart.length === 0) {
-        alert("You lost");
-      document.location.reload();
-      clearInterval(interval);
-      }
     }
 
     updateHeartDisplay() {
       const heartDisplay = this.heart.join(' ')
       document.getElementById('count').innerHTML = heartDisplay
     }
+
+    showGameOverModal() {
+      this.gameOverModal.style.display = "flex"
+      const restartGame = document.getElementById('restart')
+      restartGame.addEventListener("click", () => {
+        document.location.reload();
+        clearInterval(interval);
+      })
+    }
+
+    
+
+    // showGameWonModal() {
+
+    // }
   }
 
 
@@ -192,6 +210,8 @@ mute.addEventListener("click", () => {
 
   const score = new Score();
   const heart = new Heart();
+
+ 
 
   let updatesSinceLastBounce = 0;
 
@@ -224,7 +244,7 @@ mute.addEventListener("click", () => {
 
     if (
       ball.ballX - ballDiameter / 2 < 0 ||
-      ball.ballX + ballDiameter / 2 > boardWidth
+      ball.ballX + ballDiameter + 10 / 2 > boardWidth
     ) {
       ballDx = -ballDx;
 
@@ -236,12 +256,12 @@ mute.addEventListener("click", () => {
     } else if (ball.ballY + ballDiameter >= boardHeight) {
       ballDy = -ballDy;
       heart.decreaseHeart()
-     ball.resetBall()
-      // if(heart.heart.length === 0) {
-      //   alert("You lost");
-      // document.location.reload();
-      // clearInterval(interval);
-      // }
+      ball.resetBall()
+      if(heart.heart.length === 0) {
+        heart.showGameOverModal()
+        // document.location.reload();
+      clearInterval(interval);
+      }
     }
 
     // Collision detection loop where the ball hits the paddle
@@ -249,8 +269,8 @@ mute.addEventListener("click", () => {
       ball.ballX + ballDiameter >= paddle.paddleX &&
       ball.ballX <= paddle.paddleX + paddle.width &&
       ball.ballY + ballDiameter >= paddle.paddleY  && 
-      ball.ballY <= paddle.paddleY + paddle.height && 
-      updatesSinceLastBounce > 10
+      ball.ballY <= paddle.paddleY + paddle.height &&
+      updatesSinceLastBounce > 15
     ) {
       ballDy = -ballDy;
       updatesSinceLastBounce = 0;
@@ -289,8 +309,17 @@ mute.addEventListener("click", () => {
         brick.brickElm.remove();
         bricks.splice(i, 1);
         if(score.hits >= 10 && score.hits % 10 === 0) { 
-          ballDx += 1
-          ballDy += 1
+          if(ballDx > 0) {
+            ballDx += 1
+          } else {
+            ballDx -= 1
+          }
+          
+          if(ballDy > 0){
+            ballDy += 1
+          } else {
+            ballDy -= 1
+          }
           increaseBallSpeed = true
           console.log('x', ballDx)
           console.log('y', ballDy)
