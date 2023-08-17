@@ -36,7 +36,7 @@ mute.addEventListener("click", () => {
 
   class Paddle {
     constructor() {
-      this.width = 600;
+      this.width = 150;
       this.height = 15;
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
