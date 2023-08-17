@@ -159,12 +159,24 @@ mute.addEventListener("click", () => {
 
   class Heart {
     constructor() {
-      this.heart = 3;
+      this.heart = ["♡", "♡", "♡"];
+      this.updateHeartDisplay()
     }
 
     decreaseHeart() {
-      this.heart -= 1;
-      document.getElementById("count").innerHTML = this.heart;
+      this.heart.pop();
+      this.updateHeartDisplay()
+
+      if(heart.heart.length === 0) {
+        alert("You lost");
+      document.location.reload();
+      clearInterval(interval);
+      }
+    }
+
+    updateHeartDisplay() {
+      const heartDisplay = this.heart.join(' ')
+      document.getElementById('count').innerHTML = heartDisplay
     }
   }
 
@@ -212,8 +224,16 @@ mute.addEventListener("click", () => {
       hitWallAudio.play();
     }
 
-    if (ball.ballY < 0 || ball.ballY + ballDiameter >= boardHeight) {
+    if (ball.ballY < 0) {
       ballDy = -ballDy;
+    } else if (ball.ballY + ballDiameter >= boardHeight) {
+      ballDy = -ballDy;
+      heart.decreaseHeart()
+      // if(heart.heart.length === 0) {
+      //   alert("You lost");
+      // document.location.reload();
+      // clearInterval(interval);
+      // }
     }
 
     // Collision detection loop where the ball hits the paddle
@@ -233,12 +253,12 @@ mute.addEventListener("click", () => {
     }
 
 
-    if (ball.ballY + ballDiameter > boardHeight) {
-      // alert("You lost");
-      heart.heart = 2;
-      document.location.reload();
-      clearInterval(interval);
-    }
+    // if (ball.ballY + ballDiameter > boardHeight) {
+    //   // alert("You lost");
+    //   heart.heart = 2;
+    //   document.location.reload();
+    //   clearInterval(interval);
+    // }
 
     for (let i = 0; i < bricks.length; i++) {
       const brick = bricks[i];
