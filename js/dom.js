@@ -145,7 +145,7 @@ class Heart {
   constructor() {
     this.heart = ["♡", "♡", "♡"];
     this.gameOverModal = document.getElementById("gameOver");
-    this.gameWonModal = document.getElementsByClassName("gameWon");
+    this.gameWonModal = document.getElementById("gameWon");
     this.updateHeartDisplay();
   }
 
@@ -324,6 +324,8 @@ const interval = setInterval(() => {
     youWonAudio.play()
     youWonAudio.volume = 0.5;
     clearInterval(interval);
+
+    console.log(heart.showGameWonModal())
   }
 
 }, 10);
