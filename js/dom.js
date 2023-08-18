@@ -167,7 +167,6 @@ class Heart {
       document.location.reload();
       clearInterval(interval);
     });
-
   }
 
   showGameWonModal() {
@@ -180,7 +179,7 @@ class Heart {
   }
 }
 
-
+//Audio elements
 let mute = document.getElementById("mute");
 let audioElements = document.getElementsByTagName("audio");
 let isMuted = false;
@@ -190,7 +189,7 @@ let brickHitAudio = document.getElementById("brickHitAudio");
 let gameOverAudio = document.getElementById("gameOverAudio");
 let youWonAudio = document.getElementById("youWonAudio");
 
-// init objects
+// Init objects
 const paddle = new Paddle();
 const ball = new Ball();
 const score = new Score();
@@ -228,7 +227,7 @@ const colors = [
   "#4D908E",
 ];
 
-// create bricks
+// Create bricks
 for (let i = 0; i < bricksColCount; i++) {
   for (let j = 0; j < bricksRowsCount; j++) {
     const bX = i * (brickWidth + 5.5) + boardMargin;
@@ -244,7 +243,7 @@ const interval = setInterval(() => {
   ball.ballX += ballDx;
   ball.ballY += ballDy;
 
-  // ball collison with vertical walls
+  // Ball collison with vertical walls
   if (
     ball.ballX - ballDiameter / 2 < 0 ||
     ball.ballX + ballDiameter + 10 / 2 > boardWidth
@@ -254,7 +253,7 @@ const interval = setInterval(() => {
     hitWallAudio.play();
   }
 
-    // ball collison with horizontal walls
+  // Ball collison with horizontal walls
   if (ball.ballY < 0) {
     ballDy = -ballDy;
   } else if (ball.ballY + ballDiameter >= boardHeight) {
@@ -263,11 +262,11 @@ const interval = setInterval(() => {
     ball.resetBall();
     if (heart.heart.length === 0) {
       heart.showGameOverModal();
-      gameOverAudio.play()
+      gameOverAudio.play();
       gameOverAudio.volume = 0.5;
       clearInterval(interval);
     }
-      }
+  }
 
   // Collision detection loop where the ball hits the paddle
   if (
@@ -321,11 +320,10 @@ const interval = setInterval(() => {
 
   if (score.hits === totalBricks) {
     heart.showGameWonModal();
-    youWonAudio.play()
+    youWonAudio.play();
     youWonAudio.volume = 0.5;
     clearInterval(interval);
 
-    console.log(heart.showGameWonModal())
+    console.log(heart.showGameWonModal());
   }
-
 }, 10);

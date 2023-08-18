@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/dom.css" />
     <title>Breakout</title>
-    <link rel="stylesheet" href="./css/dom.css">
-    <link rel="icon" href="./images/favIcon.jpg">
+    <link rel="icon" href="./images/favIcon.jpg" />
     <audio id="paddleAudio" src="./audios/paddle.mp3"></audio>
     <audio id="hitWallAudio" src="./audios/wall.mp3"></audio>
     <audio id="brickHitAudio" src="./audios/bricks.mp3"></audio>
-    <audio id= "gameOverAudio" src="./audios/game-over.mp3"></audio>
+    <audio id="gameOverAudio" src="./audios/game-over.mp3"></audio>
     <audio id="youWonAudio" src="./audios/you-won.mp3"></audio>
     <button id="mute">🔇</button>
-
-</head>
-<body>
+  </head>
+  <body>
     <div id="score">
-        <h2>Score: <span id ="hits">0</span></h2>
+      <h2>Score: <span id="hits">0</span></h2>
     </div>
     <div id="heart">
-        <h2 id ="count">♡ ♡ ♡</h2>
+      <h2 id="count">♡ ♡ ♡</h2>
     </div>
     <div id="board"></div>
 
     <div id="gameOver" class="modal">
-        <div id="modalContent">
-            <h2>Game Over!</h2>
-            <button id="restart">Restart!</button>
-        </div>
+      <div id="modalContent">
+        <h2>Game Over!</h2>
+        <button id="restart">Restart!</button>
+      </div>
     </div>
-    
+
     <div id="gameWon" class="modal">
-        <div id="modalContent">
-            <h2>You Won 🔥</h2>
-            <button id="playAgain">Play Again!</button>
-
-        </div>
+      <div id="modalContent">
+        <h2>You Won 🔥</h2>
+        <button id="playAgain">Play Again!</button>
+      </div>
     </div>
-    
-
-    
-
-
 
     <script src="./js/dom.js"></script>
-</body>
+  </body>
 </html>
