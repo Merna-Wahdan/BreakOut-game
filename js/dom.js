@@ -264,6 +264,7 @@ const interval = setInterval(() => {
     if (heart.heart.length === 0) {
       heart.showGameOverModal();
       gameOverAudio.play()
+      gameOverAudio.volume = 0.5;
       clearInterval(interval);
     }
       }
@@ -280,6 +281,7 @@ const interval = setInterval(() => {
     updatesSinceLastBounce = 0;
 
     paddleAudio.play();
+    paddleAudio.volume = 0.5;
   }
 
   // Collision detection for bricks
@@ -294,7 +296,7 @@ const interval = setInterval(() => {
     ) {
       ballDy = -ballDy;
       brickHitAudio.play();
-      brickHitAudio.volume = 0.2;
+      brickHitAudio.volume = 0.1;
 
       score.increaseScore();
 
@@ -320,6 +322,7 @@ const interval = setInterval(() => {
   if (score.hits === totalBricks) {
     heart.showGameWonModal();
     youWonAudio.play()
+    youWonAudio.volume = 0.5;
     clearInterval(interval);
   }
 

@@ -5,10 +5,10 @@ const instructions = document.getElementById("instructions")
 let isVisible = true;
 
 
-setInterval(() => {
-    isVisible = !isVisible;
-    clickToStart.style.visibility = isVisible ? "visible" : "hidden";
-}, 500);
+// setInterval(() => {
+//     isVisible = !isVisible;
+//     clickToStart.style.visibility = isVisible ? "visible" : "hidden";
+// }, 500);
 
 clickToStart.addEventListener("click", () => {
     clickStart.play()

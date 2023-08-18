@@ -23,17 +23,9 @@ body {
     font-family: Arial;
     margin: 90px;
     margin-left: 50px;
-
     color:  #FFBA08;
-
   }
 
-  /* #mute {
-    position: absolute;
-    margin: 50px;
-    right: 50px;     
-  } */
- 
 #board {
     /* background-color: white;
     width: 100vw;
@@ -127,7 +119,7 @@ h1 {
 #clickToStart {
     color: #50394c;
     font-family: 'Handjet', cursive;
-    font-size: 20px;
+    font-size: 45px;
     position: absolute;
     text-align: center;
     bottom: 210px;
@@ -137,6 +129,23 @@ h1 {
     white-space: nowrap;
     cursor: pointer;
 }
+@keyframes pulseAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.click-to-start {
+    animation: pulseAnimation 1.5s infinite;
+    cursor: pointer;
+}
+
 
 
 #mute {
