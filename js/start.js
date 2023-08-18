@@ -1,6 +1,6 @@
 const clickToStart = document.getElementById("clickToStart");
 const clickStart = document.getElementById("clickStart")
-
+const instructions = document.getElementById("instructions")
 
 let isVisible = true;
 
@@ -18,21 +18,3 @@ clickToStart.addEventListener("click", () => {
 
     }, 400) 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-// startSound.play()
-// startSound.volume = 0.5;
-
-// const options = document.getElementById("options")
-// options.style.visibility = isVisible ? "visible" : "hidden";

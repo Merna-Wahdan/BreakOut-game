@@ -114,8 +114,6 @@ body {
 
 h1 {
     color: #50394c;
-    /* font-family: 'Games', sans-serif; */
-    /* font-family: 'Press Start 2P';                                   */
     font-family: 'Bungee Spice', cursive;
     font-size: 100px;
     position: absolute;
@@ -143,19 +141,16 @@ h1 {
 
 #mute {
         position: absolute;
-        font-family: 'Games', sans-serif;
         font-size: 30px;
         text-align: center;
         margin-top: 5px;
         right: 200px; 
         border: none;
-        background-color: #4D908E;
+        background-color:rgba(0, 0, 0, 0.1);
         color: #f4e1d2;
-        /* padding: 10px 20px; */
         border-radius: 5px;
         cursor: pointer;
         box-shadow: 0 0 20px rgba(234, 76, 14, 0.5); 
-        /* transition: box-shadow 0.3s ease-in-out;  */
     }
 
 /* Modal styles */
@@ -175,18 +170,16 @@ h1 {
     background-color: #FFBA08;
     font-family: 'Handjet', cursive;
     font-size: 40px;
-    /* font-weight: bolder; */
     padding: 20px;
     border-radius: 10px;
     text-align: center;
 }
 
 
-#restart, #playAgain {
+#restart, #playAgain{
     color: #50394c;
     font-family: 'Handjet', cursive;
     font-size: 40px;
-    /* position: absolute; */
     margin-left: 10px;
     text-align: center;
     cursor: pointer;
@@ -197,4 +190,18 @@ h1 {
 
 #playAgain {
     padding: 0px 10px;
+}
+
+#instructions {
+    color: #50394c;
+    font-family: 'Handjet', cursive;
+    font-size: 20px;
+    position: absolute;
+    text-align: center;
+    top: 610px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    white-space: nowrap;
+    cursor: pointer;
 }

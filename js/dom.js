@@ -1,40 +1,11 @@
 let body = document.getElementById("board");
 const boardWidth = 920;
 const boardHeight = 700;
-body.style.width = boardWidth + "px";
-body.style.height = boardHeight + "px";
 const boardPadding = 7;
 const boardMargin = 5;
-const ballDiameter = 20;
-//Ball horizontal & vertical velocity
-let ballDx = 3;
-let ballDy = -3;
-let increaseBallSpeed = false;
-const bricksColCount = 13;
-const bricksRowsCount = 8;
-const totalBricks = bricksColCount * bricksRowsCount;
-const brickWidth = 65;
-const brickHeight = 20;
 
-
-let mute = document.getElementById("mute");
-let audioElements = document.getElementsByTagName("audio");
-let isMuted = false;
-let paddleAudio = document.getElementById("paddleAudio");
-let hitWallAudio = document.getElementById("hitWallAudio");
-let brickHitAudio = document.getElementById("brickHitAudio");
-let gameOverAudio = document.getElementById("gameOverAudio");
-let youWonAudio = document.getElementById("youWonAudio");
-
-mute.addEventListener("click", () => {
-  isMuted = !isMuted;
-
-  for (const audioElement of audioElements) {
-    audioElement.muted = isMuted;
-  }
-
-  mute.textContent = isMuted ? "🔊" : "🔇";
-});
+body.style.width = boardWidth + "px";
+body.style.height = boardHeight + "px";
 
 class Paddle {
   constructor() {
@@ -85,6 +56,11 @@ class Paddle {
   }
 }
 
+const ballDiameter = 20;
+let ballDx = 3; // Ball horizontal velocity
+let ballDy = -3; // Ball vertical velocity
+let increaseBallSpeed = false;
+
 class Ball {
   constructor() {
     this.ballX = boardWidth / 2 - ballDiameter / 2;
@@ -122,6 +98,12 @@ class Ball {
     increaseBallSpeed = false; //reset speed to noraml
   }
 }
+
+const bricksColCount = 13;
+const bricksRowsCount = 8;
+const totalBricks = bricksColCount * bricksRowsCount;
+const brickWidth = 65;
+const brickHeight = 20;
 
 class Brick {
   constructor(x, y, color) {
@@ -162,8 +144,8 @@ class Score {
 class Heart {
   constructor() {
     this.heart = ["♡", "♡", "♡"];
-    this.gameOverModal = document.getElementsByClassName("modal")[0];
-    this.gameWonModal = document.getElementsByClassName("modal")[1];
+    this.gameOverModal = document.getElementById("gameOver");
+    this.gameWonModal = document.getElementsByClassName("gameWon");
     this.updateHeartDisplay();
   }
 
@@ -198,12 +180,39 @@ class Heart {
   }
 }
 
+
+let mute = document.getElementById("mute");
+let audioElements = document.getElementsByTagName("audio");
+let isMuted = false;
+let paddleAudio = document.getElementById("paddleAudio");
+let hitWallAudio = document.getElementById("hitWallAudio");
+let brickHitAudio = document.getElementById("brickHitAudio");
+let gameOverAudio = document.getElementById("gameOverAudio");
+let youWonAudio = document.getElementById("youWonAudio");
+
+// init objects
 const paddle = new Paddle();
-
 const ball = new Ball();
-
 const score = new Score();
 const heart = new Heart();
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "ArrowRight") {
+    paddle.moveRight();
+  } else if (e.code === "ArrowLeft") {
+    paddle.moveLeft();
+  }
+});
+
+mute.addEventListener("click", () => {
+  isMuted = !isMuted;
+
+  for (const audioElement of audioElements) {
+    audioElement.muted = isMuted;
+  }
+
+  mute.textContent = isMuted ? "🔊" : "🔇";
+});
 
 let updatesSinceLastBounce = 0;
 
@@ -219,6 +228,7 @@ const colors = [
   "#4D908E",
 ];
 
+// create bricks
 for (let i = 0; i < bricksColCount; i++) {
   for (let j = 0; j < bricksRowsCount; j++) {
     const bX = i * (brickWidth + 5.5) + boardMargin;
@@ -234,6 +244,7 @@ const interval = setInterval(() => {
   ball.ballX += ballDx;
   ball.ballY += ballDy;
 
+  // ball collison with vertical walls
   if (
     ball.ballX - ballDiameter / 2 < 0 ||
     ball.ballX + ballDiameter + 10 / 2 > boardWidth
@@ -243,6 +254,7 @@ const interval = setInterval(() => {
     hitWallAudio.play();
   }
 
+    // ball collison with horizontal walls
   if (ball.ballY < 0) {
     ballDy = -ballDy;
   } else if (ball.ballY + ballDiameter >= boardHeight) {
@@ -270,6 +282,7 @@ const interval = setInterval(() => {
     paddleAudio.play();
   }
 
+  // Collision detection for bricks
   for (let i = 0; i < bricks.length; i++) {
     const brick = bricks[i];
 
@@ -281,7 +294,7 @@ const interval = setInterval(() => {
     ) {
       ballDy = -ballDy;
       brickHitAudio.play();
-      brickHitAudio.volume = 0.3;
+      brickHitAudio.volume = 0.2;
 
       score.increaseScore();
 
@@ -300,8 +313,6 @@ const interval = setInterval(() => {
           ballDy -= 1;
         }
         increaseBallSpeed = true;
-        console.log("x", ballDx);
-        console.log("y", ballDy);
       }
     }
   }
@@ -313,11 +324,3 @@ const interval = setInterval(() => {
   }
 
 }, 10);
-
-document.addEventListener("keydown", (e) => {
-  if (e.code === "ArrowRight") {
-    paddle.moveRight();
-  } else if (e.code === "ArrowLeft") {
-    paddle.moveLeft();
-  }
-});
