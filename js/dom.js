@@ -7,7 +7,6 @@ window.addEventListener("load", (event) => {
   const boardPadding = 7;
   const boardMargin = 5;
   const ballDiameter = 20;
-  let isBouncing = false;
   //Ball horizontal & vertical velocity
   let ballDx = 3;
   let ballDy = -3;
@@ -18,7 +17,6 @@ window.addEventListener("load", (event) => {
   const brickWidth = 65;
   const brickHeight = 20;
 
-  // let hearts = 3;
 
   let mute = document.getElementById("mute");
   let audioElements = document.getElementsByTagName("audio");
@@ -28,8 +26,6 @@ window.addEventListener("load", (event) => {
   let brickHitAudio = document.getElementById("brickHitAudio");
   let gameOverAudio = document.getElementById("gameOverAudio");
   let youWonAudio = document.getElementById("youWonAudio");
-  //   let backgroundAudio = document.getElementById("background")
-  //   backgroundAudio.volume = 0.5
 
   mute.addEventListener("click", () => {
     isMuted = !isMuted;
@@ -48,9 +44,6 @@ window.addEventListener("load", (event) => {
       this.paddleX = boardWidth / 2 - this.width / 2;
       this.paddleY = boardHeight - this.height - 5;
       this.speed = 70;
-      //   this.paddingTop = 4 + "px";
-      //   this.paddingLeft = 4 + "px";
-      //   this.paddingRight = 4 + "px";
 
       this.createNewPaddle();
     }
@@ -58,7 +51,6 @@ window.addEventListener("load", (event) => {
     createNewPaddle() {
       this.paddleElm = document.createElement("div");
       this.paddleElm.classList.add("paddle");
-      // this.paddleElm.id = 'player'
 
       //Set position
       this.paddleElm.style.width = this.width + "px";
@@ -96,8 +88,8 @@ window.addEventListener("load", (event) => {
 
   class Ball {
     constructor() {
-      this.ballX = boardWidth / 2 - ballDiameter / 2; //290;
-      this.ballY = boardHeight / 2 - ballDiameter / 2; //360;
+      this.ballX = boardWidth / 2 - ballDiameter / 2;
+      this.ballY = boardHeight / 2 - ballDiameter / 2;
       this.createNewBall();
     }
 
@@ -126,8 +118,8 @@ window.addEventListener("load", (event) => {
         boardWidth / 2 - ballDiameter / 2,
         boardHeight / 2 - ballDiameter / 2
       );
-      ballDx = 3; //Math.abs(ballDx); // Reset horizontal velocity
-      ballDy = -3; //-Math.abs(ballDy); // Reset vertical velocity
+      ballDx = 3; // Reset horizontal velocity
+      ballDy = -3; // Reset vertical velocity
       increaseBallSpeed = false; //reset speed to noraml
     }
   }
@@ -216,11 +208,6 @@ window.addEventListener("load", (event) => {
 
   let updatesSinceLastBounce = 0;
 
-  // if () {
-  //     document.getElementById("hits").innerText =
-  //     score.hits;
-  //     }
-
   const bricks = [];
   const colors = [
     "#F94144",
@@ -281,18 +268,8 @@ window.addEventListener("load", (event) => {
       ballDy = -ballDy;
       updatesSinceLastBounce = 0;
 
-      //   if(ball.ballY >= 655) {
-      //     ball.ballY = 654
-      //   }
       paddleAudio.play();
     }
-
-    // if (ball.ballY + ballDiameter > boardHeight) {
-    //   // alert("You lost");
-    //   heart.heart = 2;
-    //   document.location.reload();
-    //   clearInterval(interval);
-    // }
 
     for (let i = 0; i < bricks.length; i++) {
       const brick = bricks[i];
@@ -329,15 +306,6 @@ window.addEventListener("load", (event) => {
         }
       }
     }
-
-    // if(score.hits >= 5 && score.hits % 5 === 0) {
-    //   ballDx += 1.5
-    //   ballDy += 1.5
-    //   increaseBallSpeed = true
-    //   console.log('x', ballDx)
-    //   console.log('y', ballDy)
-
-    // }
 
     if (score.hits === totalBricks) {
       heart.showGameWonModal();
